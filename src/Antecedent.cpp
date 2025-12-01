@@ -1,0 +1,118 @@
+#include "Antecedent.h"
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <iomanip>
+
+
+Antecedent::Antecedent(int idAntecedent,const std::string& type, const std::string& description, const std::string& dateEvenement, int idPatient) :
+    m_idAntecedent(idAntecedent), m_type(type), m_description(description), m_dateEvenement(dateEvenement), m_idPatient(idPatient)
+{
+
+}
+
+        // Accesseurs
+int Antecedent::getIdAntecedent() const
+{
+    return m_idAntecedent;
+}
+
+
+std::string Antecedent::getType() const
+{
+    return m_type;
+}
+
+
+std::string Antecedent::getDescription() const
+{
+    return m_description;
+}
+
+
+std::string Antecedent::getDate() const
+{
+    return m_dateEvenement;
+}
+
+
+int Antecedent::getIdPatient() const
+{
+    return m_idPatient;
+}
+
+
+
+        // Mutateurs
+void Antecedent::setType(const std::string& type)
+{
+    m_type = type;
+}
+
+
+
+void Antecedent::setDescription(const std::string& description)
+{
+    m_description = description;
+}
+
+
+
+void Antecedent::setDate(const std::string& date)
+{
+    m_dateEvenement = date;
+}
+
+
+
+std::string Antecedent::toCSV() const
+{
+    return std::to_string(m_idAntecedent) + ";" + m_type + ";" + m_description + ";" + m_dateEvenement + ";" + std::to_string(m_idPatient);
+}
+
+
+
+
+Antecedent Antecedent::fromCSV(const std::string& line)
+{
+    std::stringstream ss(line);
+    std::string item;
+    std::vector<std::string> elmts;
+    while (std::getline(ss, item, ';'))
+    {
+        elmts.push_back(item);
+    }
+
+    if (elmts.size() != 5)
+        throw std::invalid_argument("Format CSV incorrect pour Antecedent");
+    return Antecedent(std::stoi(elmts[0]), elmts[1], elmts[2], elmts[3], std::stoi(elmts[4]));
+}
+
+
+
+
+void Antecedent::afficherDetailsAntecedent() const
+{
+    std::cout << "\n===== ANTECEDENTS =====\n\n";
+
+    // En-têtes de colonnes
+    std::cout << std::left
+              << std::setw(5)  << "N°"
+              << std::setw(5)  << "ID Patient"
+              << std::setw(12) << "Type"
+              << std::setw(20) << "Description (falcutatif)"
+              << std::setw(12) << "Date"
+              << "\n";
+
+    std::cout << std::string(100, '-') << "\n";
+
+    // Lignes
+        std::cout << std::left
+                  << std::setw(5)  << m_idAntecedent
+                  << std::setw(5)  << m_idPatient
+                  << std::setw(12) << m_type
+                  << std::setw(20) << m_description
+                  << std::setw(12) << m_dateEvenement
+                  << "\n";
+    std::cout << std::string(100, '-') << "\n";
+}

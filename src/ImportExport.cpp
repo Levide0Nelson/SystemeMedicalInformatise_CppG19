@@ -1,0 +1,387 @@
+#include "ImportExport.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <time.h>
+#include "Systeme.h"
+#include "Patient.h"
+#include "UtilConsole.h"
+
+
+std::string ImportExport::obtenirDateActuelle()
+{
+    time_t now = time(0);
+    tm* localtm = localtime(&now);
+    std::stringstream ss;
+
+    ss << (1900 + localtm -> tm_year) << "-"
+       << (1 + localtm -> tm_mon) << "-"
+       << localtm -> tm_mday;
+
+    return ss.str();
+}
+
+
+
+bool ImportExport::fichierExiste(const std::string& chemin)
+{
+    std::ifstream fichier(chemin);
+    return fichier.good();
+}
+
+
+
+void ImportExport::exporterDossierPatientEnTxt(int idPatient, Systeme& systeme, const std::string& chemin)
+{
+    Patient* patient = systeme.rechercherPatient(idPatient);
+    if (!patient)
+    {
+        std::cout << "[ERREUR] Patient introuvable.\n";
+        return;
+    }
+
+    DossierMedical* dossier = systeme.rechercherDossier(idPatient);
+    if (!dossier)
+    {
+        std::cout << "[ERREUR] Dossier medical introuvable.\n";
+        return;
+    }
+
+    std::string nomFichier = chemin + "/patient_" + std::to_string(idPatient)
+                            + "_" + obtenirDateActuelle() + ".txt";
+    std::ofstream fichier(nomFichier);
+
+    if (fichier.is_open())
+    {
+        fichier << "========================================\n";
+        fichier << "   DOSSIER MEDICAL PATIENT\n";
+        fichier << "========================================\n\n";
+
+        // Informations patient
+        fichier << "=== INFORMATIONS PATIENT ===\n";
+        fichier << "ID Patient : " << patient->getIdPatient() << "\n";
+        fichier << "Nom : " << patient->getNomPatient() << "\n";
+        fichier << "Prenom : " << patient->getPrenomPatient() << "\n";
+        fichier << "Date Naissance : " << patient->getDateDeNaissance() << "\n";
+        fichier << "Genre : " << patient->getGenre() << "\n";
+        fichier << "Adresse : " << patient->getAdresse() << "\n";
+        fichier << "Telephone : " << patient->getTelephone() << "\n";
+        fichier << "Email : " << patient->getEmail() << "\n\n";
+
+        // Consultations
+        fichier << "=== CONSULTATIONS ===\n";
+        const auto& consultations = dossier->getConsultations();
+        if (consultations.empty())
+            fichier << "Aucune Consultation.\n";
+        else
+        {
+            for (const auto& cons : consultations)
+            {
+                fichier << "Consultation #" << cons.getIdPatient() << "\n";
+                fichier << "  Date : " << cons.getDate() << "\n";
+                fichier << "  Motif : " << cons.getMotif() << "\n";
+                fichier << "  Observations : " << cons.getObservations() << "\n";
+                fichier << "  Professionnel : " << cons.getNomCompletPro() << "\n\n";
+            }
+        }
+
+        // Antécédents
+        fichier << "=== ANTECEDENTS MEDICAUX ===\n";
+        const auto& antecedents = dossier->getAntecedents();
+        if (antecedents.empty())
+        {
+            fichier << "Aucun antecedent.\n";
+        }
+        else
+        {
+            for (const auto& ant : antecedents)
+            {
+                fichier << "Antecedent #" << ant.getIdAntecedent() << "\n";
+                fichier << "  Type : " << ant.getType() << "\n";
+                fichier << "  Description : " << ant.getDescription() << "\n";
+                fichier << "  Date : " << ant.getDate() << "\n\n";
+            }
+        }
+
+         // Prescriptions
+        fichier << "=== PRESCRIPTIONS ===\n";
+        const auto& prescriptions = dossier->getPrescriptions();
+        if (prescriptions.empty())
+        {
+            fichier << "Aucune prescription.\n";
+        }
+        else
+        {
+            for (const auto& prescript : prescriptions)
+            {
+                fichier << "Prescription #" << prescript.getIdPrescription() << "\n";
+                fichier << "  Date : " << prescript.getDate() << "\n";
+                fichier << "  Contenu : " << prescript.getContenu() << "\n";
+                fichier << "  Remarque : " << prescript.getRemarque() << "\n\n";
+            }
+        }
+
+        fichier.close();
+        std::cout << "[SUCCES] Dossier exporte : " << nomFichier << "\n";
+    }
+    else
+    {
+        std::cout << "[ERREUR] Impossible de creer le fichier d'export.\n";
+    }
+}
+
+
+
+
+void ImportExport::exporterStatistiquesEnTxt(Systeme& systeme, const std::string& chemin)
+{
+    std::string nomFichier = chemin + "/statistiques_" + obtenirDateActuelle() + ".txt";
+    std::ofstream fichier(nomFichier);
+
+    if (fichier.is_open())
+    {
+        fichier << "========================================\n";
+        fichier << "   STATISTIQUES DU SYSTEME\n";
+        fichier << "========================================\n\n";
+
+        fichier << "Nombre total de patients : " << systeme.getNombrePatients() << "\n";
+        fichier << "Nombre total de professionnels : " << systeme.getNombreProfessionnels() << "\n";
+        fichier << "Nombre total d'administrateurs : " << systeme.getNombreAdmins() << "\n";
+        fichier << "Nombre total de consultations : " << systeme.getNombreConsultations() << "\n";
+        fichier << "Nombre total d'antecedents : " << systeme.getNombreAntecedents() << "\n";
+        fichier << "Nombre total de prescriptions : " << systeme.getNombrePrescriptions() << "\n";
+
+        fichier.close();
+        std::cout << "[SUCCES] Statistiques exportees : " << nomFichier << "\n";
+    }
+    else
+    {
+        std::cout << "[ERREUR] Impossible de creer le fichier d'export.\n";
+    }
+}
+
+
+
+void ImportExport::exporterTousLesPatientsEnTxt(Systeme& systeme, const std::string& chemin)
+{
+    std::string nomFichier = chemin + "/liste_patients_" + obtenirDateActuelle() + ".csv";
+    std::ofstream fichier(nomFichier);
+
+    if (fichier.is_open())
+    {
+         fichier << "ID;Nom;Prenom;DateNaissance;Genre;Adresse;Telephone;Email\n";
+         const auto& patients = systeme.getPatients();
+        for (const auto& patient : patients)
+        {
+            fichier << patient.getIdPatient() << ";"
+                << patient.getNomPatient() << ";"
+                << patient.getPrenomPatient() << ";"
+                << patient.getDateDeNaissance() << ";"
+                << patient.getGenre() << ";"
+                << patient.getAdresse() << ";"
+                << patient.getTelephone() << ";"
+                << patient.getEmail() << "\n";
+        }
+        fichier.close();
+        std::cout << "[SUCCES] Liste patients exportee : " << nomFichier << "\n";
+    }
+    else
+    {
+        std::cout << "[ERREUR] Impossible de creer le fichier d'export.\n";
+    }
+}
+
+
+
+
+void ImportExport::exporterTousLesPatientsEnCsv(Systeme& systeme, const std::string& chemin)
+{
+    std::string nomFichier = chemin + "/export_patients_" + obtenirDateActuelle() + ".csv";
+
+    std::ofstream fichier(nomFichier);
+    if (!fichier.is_open())
+    {
+        std::cout << "[ERREUR] Impossible de creer le fichier : " << nomFichier << "\n";
+        return;
+    }
+
+    // En-tete CSV
+    fichier << "ID;Nom;Prenom;DateNaissance;Genre;Adresse;Telephone;Email\n";
+
+    const auto& patients = systeme.getPatients(); // prévois un getter const sur le vecteur
+    for (const auto& p : patients)
+    {
+        fichier << p.getIdPatient()       << ";"
+                << p.getNomPatient()      << ";"
+                << p.getPrenomPatient()   << ";"
+                << p.getDateDeNaissance() << ";"
+                << p.getGenre()           << ";"
+                << p.getAdresse()         << ";"
+                << p.getTelephone()       << ";"
+                << p.getEmail()           << "\n";
+    }
+
+    fichier.close();
+    std::cout << "[SUCCES] Export CSV de tous les patients dans " << nomFichier << "\n";
+}
+
+
+
+void ImportExport::exporterDossierPatientEnCsv(int idPatient, Systeme& systeme, const std::string& chemin)
+{
+    Patient* patient = systeme.rechercherPatient(idPatient);
+    if (!patient)
+    {
+        std::cout << "[ERREUR] Patient introuvable.\n";
+        return;
+    }
+
+    DossierMedical* dossier = systeme.rechercherDossier(idPatient);
+    if (!dossier)
+    {
+        std::cout << "[ERREUR] Dossier medical introuvable.\n";
+        return;
+    }
+
+    std::string nomFichier = chemin + "/export_dossier_patient_" + std::to_string(idPatient) + "_" + obtenirDateActuelle() + ".csv";
+
+    std::ofstream fichier(nomFichier);
+    if (!fichier.is_open())
+    {
+        std::cout << "[ERREUR] Impossible de creer le fichier : " << nomFichier << "\n";
+        return;
+    }
+
+    // Section Patient (une seule ligne)
+    fichier << "SECTION;ID;Nom;Prenom;DateNaissance;Genre;Adresse;Telephone;Email\n";
+    fichier << "PATIENT;"
+            << patient->getIdPatient()       << ";"
+            << patient->getNomPatient()      << ";"
+            << patient->getPrenomPatient()   << ";"
+            << patient->getDateDeNaissance() << ";"
+            << patient->getGenre()           << ";"
+            << patient->getAdresse()         << ";"
+            << patient->getTelephone()       << ";"
+            << patient->getEmail()           << "\n\n";
+
+    // Section Consultations
+    fichier << "SECTION;IDConsultation;Date;Motif;Observation;NomProfessionnel\n";
+    const auto& consultations = dossier -> getConsultations();
+    for (const auto& c : consultations)
+    {
+            fichier << "CONSULTATION;"
+                    << c.getIdConsultation()  << ";"
+                    << c.getDate()            << ";"
+                    << c.getMotif()           << ";"
+                    << c.getObservations()     << ";"
+                    << c.getNomCompletPro()   << "\n";
+    }
+    fichier << "\n";
+
+    // Section Antecedents
+    fichier << "SECTION;IDAntecedent;Type;Description;Date\n";
+    const auto& antecedents = dossier -> getAntecedents();
+    for (const auto& a : antecedents)
+    {
+            fichier << "ANTECEDENT;"
+                    << a.getIdAntecedent() << ";"
+                    << a.getType()         << ";"
+                    << a.getDescription()  << ";"
+                    << a.getDate()         << "\n";
+    }
+    fichier << "\n";
+
+    // Section Prescriptions
+    fichier << "SECTION;IDPrescription;IdConsultation;Date;Contenu;Remarque\n";
+    const auto& prescriptions = dossier -> getPrescriptions();
+    for (const auto& pr : prescriptions)
+    {
+            fichier << "PRESCRIPTION;"
+                    << pr.getIdPrescription() << ";"
+                    << pr.getIdConsultation() << ";"
+                    << pr.getDate()           << ";"
+                    << pr.getContenu()        << ";"
+                    << pr.getRemarque()       << "\n";
+    }
+
+    fichier.close();
+    std::cout << "[SUCCES] Export CSV du dossier du patient #" << idPatient
+              << " dans " << nomFichier << "\n";
+}
+
+
+
+
+void ImportExport::exporterStatistiquesEnCsv(Systeme& systeme, const std::string& chemin)
+{
+    std::string nomFichier = chemin + "/export_statistiques_" + obtenirDateActuelle() + ".csv";
+    std::ofstream fichier(nomFichier);
+    if (!fichier.is_open())
+    {
+        std::cout << "[ERREUR] Impossible de creer le fichier : " << nomFichier << "\n";
+        return;
+    }
+
+    int nbPatients        = systeme.getNombrePatients();
+    int nbProfessionnels = systeme.getNombreProfessionnels();
+    int nbAdmins  = systeme.getNombreAdmins();
+    int nbConsultations   = systeme.getNombreConsultations();
+    int nbAntecedents     = systeme.getNombreAntecedents();
+    int nbPrescriptions   = systeme.getNombrePrescriptions();
+
+    fichier << "Type;Valeur\n";
+    fichier << "NombrePatients;"      << nbPatients      << "\n";
+    fichier << "NombreProfessionnel"  << nbProfessionnels << "\n";
+    fichier << "NombreAdministrateurs" << nbAdmins << "\n";
+    fichier << "NombreConsultations;" << nbConsultations << "\n";
+    fichier << "NombreAntecedents;"   << nbAntecedents   << "\n";
+    fichier << "NombrePrescriptions;" << nbPrescriptions << "\n";
+
+    fichier.close();
+    std::cout << "[SUCCES] Export CSV des statistiques dans " << nomFichier << "\n";
+}
+
+
+
+
+    // Import
+void ImportExport::importerPatients(const std::string& cheminFichier, Systeme& systeme)
+{
+    if (!fichierExiste(cheminFichier))
+    {
+        std::cout << "[ERREUR] Fichier introuvable : " << cheminFichier << "\n";
+        return;
+    }
+
+    std::ifstream fichier(cheminFichier);
+    std::string ligne;
+    int compteur = 0;
+
+    // Ignorer la ligne d'entête si présente
+    std::getline(fichier, ligne);
+
+    while (std::getline(fichier, ligne))
+    {
+        if (ligne.empty())
+            continue;
+        try
+        {
+            Patient p = Patient::fromCSV(ligne);
+             if (systeme.rechercherPatient(p.getIdPatient()) != nullptr)
+             {
+                 std::cout << "[ATTENTION] Patient #" << p.getIdPatient() << " existe deja\n";
+                 pauseConsole();
+                 continue;
+             }
+             systeme.ajouterPatient(p);
+             compteur++;
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << "[ERREUR] Ligne invalide ignoree : " << e.what() << "\n";
+        }
+    }
+    fichier.close();
+    systeme.sauvegarderDonnees();
+    std::cout << "[SUCCES] " << compteur << " patients importes.\n";
+}

@@ -1,0 +1,126 @@
+#include "Consultation.h"
+#include "ProfessionnelDeSante.h"
+#include "Patient.h"
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+
+Consultation::Consultation(int idConsultation, const std::string& date, const std::string& motif,
+                            const std::string& observations, int idPatient, const std::string& nomCompletPro) :
+                                m_idConsultation(idConsultation), m_dateConsultation(date), m_motif(motif),
+                                m_observations(observations), m_idPatient(idPatient), m_nomCompletPro(nomCompletPro)
+{
+
+}
+
+
+        // Accesseurs
+int Consultation::getIdConsultation() const
+{
+    return m_idConsultation;
+}
+
+
+std::string Consultation::getDate() const
+{
+    return m_dateConsultation;
+}
+
+
+std::string Consultation::getMotif() const
+{
+    return m_motif;
+}
+
+
+std::string Consultation::getObservations() const
+{
+    return m_observations;
+}
+
+
+int Consultation::getIdPatient() const
+{
+    return m_idPatient;
+}
+
+
+std::string Consultation::getNomCompletPro() const
+{
+    return m_nomCompletPro;
+}
+
+
+
+        // Mutateurs
+void Consultation::setDate(const std::string& date)
+{
+    m_dateConsultation = date;
+}
+
+
+void Consultation::setMotif(const std::string& motif)
+{
+    m_motif = motif;
+}
+
+
+void Consultation::setObservations(const std::string& observations)
+{
+    m_observations = observations;
+}
+
+
+
+std::string Consultation::toCSV() const
+{
+    return std::to_string(m_idConsultation) + ";" + m_dateConsultation + ";" + m_motif + ";" + m_observations + ";" + std::to_string(m_idPatient) + ";" + m_nomCompletPro;
+}
+
+
+
+Consultation Consultation::fromCSV(const std::string& line)
+{
+    std::stringstream ss(line);
+    std::string item;
+    std::vector<std::string> elmts;
+
+    while (std::getline(ss, item, ';'))
+    {
+        elmts.push_back(item);
+    }
+    if (elmts.size() != 6)
+        throw std::invalid_argument("Format CSV incorrect pour consultation");
+    return Consultation(std::stoi(elmts[0]), elmts[1],elmts[2], elmts[3], std::stoi(elmts[4]), elmts[5]);
+}
+
+
+
+
+void Consultation::afficherDetailsConsultation() const
+{
+    std::cout << "\n===== LES CONSULTATIONS =====\n\n";
+
+    // En-têtes de colonnes
+    std::cout << std::left
+              << std::setw(5)  << "ID"
+              << std::setw(12) << "Date"
+              << std::setw(30) << "Motif"
+              << std::setw(35) << "Observations"
+              << std::setw(5)  << "ID Patient"
+              << std::setw(25)  << "Nom complet du Professionnel"            /**Améliorations avec les noms et prénoms + id si possible*/
+              << "\n";
+
+    std::cout << std::string(100, '-') << "\n";
+
+    // Lignes
+        std::cout << std::left
+                  << std::setw(5)  << m_idConsultation
+                  << std::setw(12) << m_dateConsultation
+                  << std::setw(3) << m_motif
+                  << std::setw(35) << m_observations
+                  << std::setw(5)  << m_idPatient
+                  << std::setw(25)  << m_nomCompletPro
+                  << "\n";
+    std::cout << std::string(100, '-') << "\n";
+}

@@ -1,0 +1,55 @@
+# === Fichiers spécifiques à Code::Blocks / IDE ===
+*.depend
+*.layout
+*.cbTemp
+*.cbp.workspace
+
+# Dossiers binaires / build (générés)
+bin/
+obj/
+Debug/
+Release/
+
+# === Fichiers compilés C / C++ ===
+# Objets
+*.o
+*.obj
+*.lo
+*.slo
+
+# En-têtes précompilés
+*.gch
+*.pch
+
+# Bibliothèques
+*.a
+*.la
+*.lib
+*.lai
+
+# DLL / libs dynamiques
+*.dll
+*.so
+*.dylib
+
+# Exécutables
+*.exe
+*.out
+*.app
+
+# === Fichiers temporaires / backup ===
+*~
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# === OS / éditeurs ===
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code / autres IDE
+.vscode/
+.idea/

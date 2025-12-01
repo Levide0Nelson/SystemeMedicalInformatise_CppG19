@@ -1,0 +1,50 @@
+#ifndef SECRETAIRE_H
+#define SECRETAIRE_H
+
+
+#include <string>
+
+
+class Secretaire :
+{
+    public:
+        Secretaire(int idSecretaire, const std::string& nomSecretaire, const std::string& prenomSecretaire, const std::string& mdpSecretaire,
+                   const std::string& emailSecretaire, const std::string& telephoneSecretaire, bool accessDossiersMedicaux);
+        ~Secretaire();
+
+        // Accesseurs
+        int getIdSecretaire() const;
+        std::string getNomSecretaire() const;
+        std::string getPrenomSecretaire() const;
+        std::string getMdpSecretaire() const;
+        std::string getEmailSecretaire() const;
+        std::string getTelephoneSecretaire() const;
+
+        // Mutateurs
+        void setMdp(const std::string& mdp);
+        void setEmail(const std::string& email) ;
+        void setTelephone(const std::string& tel);
+        void setProfil();
+
+
+        // méthodes générales
+        Secretaire fromCSV(const std::string& line);
+        std::string toCSV() const;
+        void afficherProfil() const;
+
+
+
+    protected:
+
+    private:
+
+        int m_idSecretraire;
+        std::string m_nomSecretaire;
+        std::string m_prenomSecretaire;
+        std::string m_mdpSecretaire;
+        std::string m_emailSecretaire;
+        std::string m_telephoneSecretaire;
+        bool m_accessDossiersMedicaux;
+};
+
+#endif // SECRETAIRE_H

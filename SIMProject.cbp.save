@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SIMProject" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SIMProject" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SIMProject" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/Administrateur.h" />
+		<Unit filename="include/Antecedent.h" />
+		<Unit filename="include/Consultation.h" />
+		<Unit filename="include/Date.h" />
+		<Unit filename="include/DossierMedical.h" />
+		<Unit filename="include/ImportExport.h" />
+		<Unit filename="include/Patient.h" />
+		<Unit filename="include/Prescription.h" />
+		<Unit filename="include/ProfessionnelDeSante.h" />
+		<Unit filename="include/RendezVous.h" />
+		<Unit filename="include/Systeme.h" />
+		<Unit filename="include/UtilConsole.h" />
+		<Unit filename="include/Utilisateur.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Administrateur.cpp" />
+		<Unit filename="src/Antecedent.cpp" />
+		<Unit filename="src/Consultation.cpp" />
+		<Unit filename="src/Date.cpp" />
+		<Unit filename="src/DossierMedical.cpp" />
+		<Unit filename="src/ImportExport.cpp" />
+		<Unit filename="src/Patient.cpp" />
+		<Unit filename="src/Prescription.cpp" />
+		<Unit filename="src/ProfessionnelDeSante.cpp" />
+		<Unit filename="src/RendezVous.cpp" />
+		<Unit filename="src/Systeme.cpp" />
+		<Unit filename="src/UtilConsole.cpp" />
+		<Unit filename="src/Utilisateur.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

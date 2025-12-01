@@ -1,0 +1,43 @@
+#ifndef ANTECEDENT_H
+#define ANTECEDENT_H
+
+#include <string>
+
+/** Classe Antecedent : Représente un évènement médical passé dans l'historique d'un patient
+*/
+
+class Antecedent
+{
+    public:
+        // Constructeurs
+        Antecedent();
+        Antecedent(int idAntecedent,const std::string& type, const std::string& description, const std::string& dateEvenement, int idPatient);
+
+        // Accesseurs
+        int getIdAntecedent() const;
+        std::string getType() const;
+        std::string getDescription() const;
+        std::string getDate() const;
+        int getIdPatient() const;
+
+        // Mutateurs
+        void setType(const std::string& type);
+        void setDescription(const std::string& description);
+        void setDate(const std::string& date);
+
+        std::string toCSV() const;
+        static Antecedent fromCSV(const std::string& line);
+
+        void afficherDetailsAntecedent() const;
+
+    protected:
+
+    private:
+        int m_idAntecedent;
+        std::string m_type;
+        std::string m_description;
+        std::string m_dateEvenement;
+        int m_idPatient;
+};
+
+#endif // ANTECEDENT_H

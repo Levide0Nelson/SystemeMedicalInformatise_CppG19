@@ -1,0 +1,103 @@
+#include "Prescription.h"
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include "UtilConsole.h"
+
+Prescription::Prescription(int idPrescription, int idConsultation, const std::string& date, const std::string& contenu, const std::string& remarque)
+                            : m_idPrescription(idPrescription), m_idConsultation(idConsultation), m_date(date), m_contenu(contenu), m_remarque(remarque)
+{
+
+}
+
+        // Accesseurs
+int Prescription::getIdPrescription() const
+{
+    return m_idPrescription;
+}
+
+
+
+int Prescription::getIdConsultation() const
+{
+    return m_idConsultation;
+}
+
+
+
+std::string Prescription::getDate() const
+{
+    return m_date;
+}
+
+
+
+std::string Prescription::getContenu() const
+{
+    return m_contenu;
+}
+
+
+
+std::string Prescription::getRemarque() const
+{
+    return m_remarque;
+}
+
+
+
+
+        // Méthodes pour la persistance
+std::string Prescription::toCSV() const
+{
+    return std::to_string(m_idPrescription) + ";" + std::to_string(m_idConsultation) + ";" + m_date +
+        ";" + m_contenu + ";" + m_remarque;
+}
+
+
+
+Prescription Prescription::fromCSV(const std::string& ligne)
+{
+    std::stringstream ss(ligne);
+    std::string item;
+    std::vector<std::string> elmts;
+    while (std::getline(ss, item, ';'))
+    {
+        elmts.push_back(item);
+    }
+    if (elmts.size() != 5)
+    {
+        throw std::invalid_argument("Format CSV incorrect pour Prescription");
+    }
+    return Prescription(std::stoi(elmts[0]), std::stoi(elmts[1]), elmts[2], elmts[3], elmts[4]);
+}
+
+
+
+
+void Prescription::afficherDetailsPrescription() const
+{
+    std::cout << "\n===== PRESCRIPTIONS =====\n\n";
+
+    // En-têtes de colonnes
+    std::cout << std::left
+              << std::setw(5)  << "ID"
+              << std::setw(5) << "CONSULTATION N°"
+              << std::setw(12) << "Date"
+              << std::setw(25) << "Contenu"
+              << std::setw(25)  << "Remarques"
+              << "\n";
+
+    std::cout << std::string(100, '-') << "\n";
+
+    // Lignes
+        std::cout << std::left
+                  << std::setw(5)  << m_idPrescription
+                  << std::setw(15) << m_idConsultation
+                  << std::setw(15) << m_date
+                  << std::setw(12) << m_contenu
+                  << std::setw(8)  << m_remarque
+                  << "\n";
+    std::cout << std::string(100, '-') << "\n";
+    pauseConsole();
+}

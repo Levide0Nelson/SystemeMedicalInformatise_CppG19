@@ -1,0 +1,24 @@
+#ifndef DATE_H
+#define DATE_H
+
+#include <string>
+#include <stdexcept>
+
+/** Classe Date : Gère les dates dans le système (consultations, antécédents, etc...)
+    Utilise la norme de date au format jour/mois/année et valide la date au bon format
+*/
+
+class Date
+{
+    public:
+        static void validerFormat(const std::string& date);
+        
+        static void validerHeure(const std::string& heure);
+
+    protected:
+
+    private:
+        static bool estValide(const std::string& str);
+};
+
+#endif // DATE_H

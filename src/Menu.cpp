@@ -1,0 +1,94 @@
+#include "Menu.h"
+#include "iostream"
+
+Menu::Menu()
+{
+    //ctor
+}
+
+
+void Menu::afficherBienvenue()
+{
+    std::cout << "\n";
+    std::cout << "╔════════════════════════════════════════════════╗" << std::endl;
+    std::cout << "║  SYSTEME D'INFORMATION MEDICAL (SIM)          ║" << std::endl;
+    std::cout << "║  Version 1.0 - Gestion Hospitalière           ║" << std::endl;
+    std::cout << "║  Bienvenue dans le système                    ║" << std::endl;
+    std::cout << "╚════════════════════════════════════════════════╝" << std::endl;
+    std::cout << "\n";
+    // Menu de Bienvenue
+    std::cout << "\t=== Acceuil ===\t" << std::endl;
+    std::cout << "1. Se connecter en tant qu'Administrateur du système SIM" << std::endl;
+    std::cout << "2. Se connecter en tant que Professionnel de Santé" << std::endl;
+
+    std::string phraseARepeter = "Votre choix : ";
+    std::cout << "Votre choix : ";
+    int choix;
+    choix = validationChoixNbre(1,2,choix, phraseARepeter);
+    switch (choix)
+    {
+        case 1 :
+            {
+                connexionAdministrateur();
+                break;
+            }
+        case 2 :
+            {
+                connexionProfessionnel();
+                break;
+            }
+        default :
+            std::cout << "Entrée invalide veuillez recommencer." << std::endl;
+    }
+}
+void Menu::afficherPageAdmin()
+{
+    std::cout << "\t=== Page d'administration du système ===" << std::endl;
+
+        std::cout << "1. Créer un compte administrateur " << std::endl;
+        std::cout << "2. Créer un compte Professionnel de santé " << std::endl
+        std::cout << "3. Supprimer un compte administrateur" << std::endl;
+        std::cout << "4. Supprimer un compte professionnel de santé" << std::endl;
+        std::cout << "5. Gérer les droits d'accès " << std::endl;
+        std::cout << "6. Voir les statistiques " << std::endl;
+        std::cout << "7. Voir les Logs système " << std::endl;
+        std::cout << "8. Afficher Profil" << std::endl;
+        std::cout << "9. Retour au menu principal" << std::endl;
+}
+void Menu::connexionAdministrateur()
+{
+
+}
+void Menu::connexioProfessionnel()
+{
+
+}
+void Menu::creerCompteAdmin(int id, string& login, string& mdp, string& nom, string& prenom)
+{
+    auto nouvelAdmin = make_shared<Administrateur>(id,login,mdp,nom,prenom, false);
+    Sys.systeme.ajouterAdministrateur(nouvelAdmin);
+    Sys.systeme.sauvegarderAdministrateurs("saves/administrateur.csv");
+}
+void Menu::creerComptePro()
+{
+
+}
+void Menu::supprimerCompteAdmin()
+{
+    std::string nom, prenom;
+    std::cout << "Nom de l'utilisateur à supprimer : ";
+    getline(cin, nom);
+    std::string << "Prénom de l'utilisateur à supprimer : ";
+    getline(cin, prenom);
+
+}
+        void supprimerComptePro();
+        void gererDroitsAcces();
+        void modifierCompte();
+        void voirLesStats();
+        void voirLogsSysteme();
+
+Menu::~Menu()
+{
+    //dtor
+}
