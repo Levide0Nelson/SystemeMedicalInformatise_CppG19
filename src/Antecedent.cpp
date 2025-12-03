@@ -98,21 +98,21 @@ void Antecedent::afficherDetailsAntecedent() const
     // En-têtes de colonnes
     std::cout << std::left
               << std::setw(5)  << "N°"
-              << std::setw(5)  << "ID Patient"
-              << std::setw(12) << "Type"
-              << std::setw(20) << "Description (falcutatif)"
+              << std::setw(15)  << "ID Patient"
+              << std::setw(18) << "Type"
+              << std::setw(35) << "Description (falcutatif)"
               << std::setw(12) << "Date"
               << "\n";
 
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(120, '-') << "\n";
 
     // Lignes
         std::cout << std::left
                   << std::setw(5)  << m_idAntecedent
-                  << std::setw(5)  << m_idPatient
-                  << std::setw(12) << m_type
-                  << std::setw(20) << m_description
+                  << std::setw(15)  << m_idPatient
+                  << std::setw(18) << m_type
+                  << std::setw(35) << m_description
                   << std::setw(12) << m_dateEvenement
                   << "\n";
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(120, '-') << "\n";
 }

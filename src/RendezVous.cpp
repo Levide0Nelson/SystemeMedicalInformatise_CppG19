@@ -118,23 +118,23 @@ void RendezVous::afficherRDV() const
     // En-têtes de colonnes
     std::cout << std::left
               << std::setw(5)  << "ID"
-              << std::setw(5) << "ID Patient"
-              << std::setw(5) << "ID professionnel"
+              << std::setw(15) << "ID Patient"
+              << std::setw(20) << "ID Professionnel"
               << std::setw(12) << "Date"
               << std::setw(8)  << "Heure"
               << std::setw(30) << "Motif"
               << "\n";
 
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(120, '-') << "\n";
 
     // Lignes
         std::cout << std::left
                   << std::setw(5)  << m_idRDV
-                  << std::setw(5) << m_idPatient
-                  << std::setw(5) << m_idProfessionnel    /** Mettre les noms et prénoms pour les pros et patients au lieu des id*/
+                  << std::setw(15) << m_idPatient
+                  << std::setw(20) << m_idProfessionnel    /** Mettre les noms et prénoms pour les pros et patients au lieu des id*/
                   << std::setw(12) << m_date
                   << std::setw(8)  << m_heure
                   << std::setw(30) << m_motif
                   << "\n";
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(120, '-') << "\n";
 }

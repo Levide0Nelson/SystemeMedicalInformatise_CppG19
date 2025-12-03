@@ -10,7 +10,7 @@ void Date::validerFormat(const std::string& date)
         throw std::invalid_argument("La date doit etre au format DD-MM-YYYY ou DD/MM/YYYY");
     }
 
-    if (date[] != '-' || date[4] != '/' || date[7] != '-' || date[7] != '/')
+    if (date[2] != '-' || date[2] != '/' || date[5] != '-' || date[5] != '/')
     {
         throw std::invalid_argument("Separateurs invalides. Format attendu : DD-MM-YYYY ou DD/MM/YYYY.");
     }

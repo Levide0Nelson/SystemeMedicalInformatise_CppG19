@@ -87,8 +87,6 @@ class Systeme
         void menuAgendaProfessionnel();
         void menuImportExport();
         void afficherMenuExport();
-        //void menuDemanderExamen;
-        //void menuSaisirResultatExamen();
 
         // Accesseurs pour les statistiques
         int getNombrePatients() const;
@@ -119,7 +117,7 @@ class Systeme
         std::vector<RendezVous> m_rendezVous;
         /**std::vector<Examen> m_examens;*/
         // Identifiant généré auto
-        int m_nextIdPatient, m_nextIdConsultation, m_nextIdAntecedent, m_nextIdPrescription, m_nextIdRDV; /**m_nextExamen*/;
+        int m_nextIdPatient, m_nextIdConsultation, m_nextIdAntecedent, m_nextIdPrescription, m_nextIdRDV;;
         // Utilisateur actuellement connecté
         Utilisateur* m_utilisateurConnecte;
         // Chemin des fichiers de sauvegarde
@@ -138,7 +136,7 @@ class Systeme
         void chargerDossiers();
         void chargerPrescriptions();
         void chargerRDV();
-        /**void chargerExamens()*/
+        
 
         void sauvegarderAdmins() const;
         void sauvegarderProfessionnels() const;
@@ -148,7 +146,6 @@ class Systeme
         void sauvegarderDossiers() const ;
         void sauvegarderPrescriptions() const;
         void sauvegarderRDV() const;
-       /** void sauvegarderExamen() const;*/
 
 };
 

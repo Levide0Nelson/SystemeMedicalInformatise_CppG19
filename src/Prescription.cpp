@@ -83,22 +83,21 @@ void Prescription::afficherDetailsPrescription() const
     // En-têtes de colonnes
     std::cout << std::left
               << std::setw(5)  << "ID"
-              << std::setw(5) << "CONSULTATION N°"
+              << std::setw(20) << "CONSULTATION N°"
               << std::setw(12) << "Date"
-              << std::setw(25) << "Contenu"
-              << std::setw(25)  << "Remarques"
+              << std::setw(40) << "Contenu"
+              << std::setw(40)  << "Remarques"
               << "\n";
 
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(120, '-') << "\n";
 
     // Lignes
         std::cout << std::left
                   << std::setw(5)  << m_idPrescription
-                  << std::setw(15) << m_idConsultation
-                  << std::setw(15) << m_date
-                  << std::setw(12) << m_contenu
-                  << std::setw(8)  << m_remarque
+                  << std::setw(20) << m_idConsultation
+                  << std::setw(12) << m_date
+                  << std::setw(40) << m_contenu
+                  << std::setw(40)  << m_remarque
                   << "\n";
-    std::cout << std::string(100, '-') << "\n";
-    pauseConsole();
+    std::cout << std::string(120, '-') << "\n";
 }

@@ -24,7 +24,7 @@ int correctChoiceNumber(int minim, int maxi, int choice, std::string repetedPhra
         }
         catch (...)
         {
-            std::cout << "Entrée invalide. Veuillez entrer un nombre entre " << minim << " et " << maxi << std::endl;
+            std::cout << "Entree invalide. Veuillez entrer un nombre entre " << minim << " et " << maxi << std::endl;
             std::cout << repetedPhrase;
             continue;
         }
@@ -62,7 +62,7 @@ char correctChoiceBoolean (char booleanChoice, std::string repeatedPhrase)
 
         if (booleanChoice != 'o' && booleanChoice != 'O' && booleanChoice != 'n' && booleanChoice != 'N')
         {
-            std::cout << "Entrée invalide. Veuillez entrer les options \"o\" ou \"n\" pour continuer." << std::endl;
+            std::cout << "Entree invalide. Veuillez entrer les options \"o\" ou \"n\" pour continuer." << std::endl;
             std::cout << repeatedPhrase;
         }
         else
@@ -80,11 +80,11 @@ void afficherBienvenue()
     SetConsoleOutputCP(65001);
     #endif // _WIN32
     std::cout << "\n";
-    std::cout << "╔══════════════════════════════════════════╗" << std::endl;
-    std::cout << "║     SYSTEME D'INFORMATION MEDICAL        ║" << std::endl;
-    std::cout << "║               MEDIPASS                   ║" << std::endl;
-    std::cout << "║ Gestion     Hospitalière    Centralisée  ║" << std::endl;
-    std::cout << "╚══════════════════════════════════════════╝" << std::endl;
+    std::cout << "\t\t\t╔══════════════════════════════════════════╗" << std::endl;
+    std::cout << "\t\t\t║     SYSTEME D'INFORMATION MEDICAL        ║" << std::endl;
+    std::cout << "\t\t\t║               MEDIPASS                   ║" << std::endl;
+    std::cout << "\t\t\t║ Gestion     Hospitalière    Centralisee  ║" << std::endl;
+    std::cout << "\t\t\t╚══════════════════════════════════════════╝" << std::endl;
 }
 
 
@@ -104,7 +104,7 @@ void afficherMenuAuthentification()
 
 /**
  * Boucle d'authentification
- * Demande username/password, valide, retourne l'utilisateur connecté
+ * Demande username/password, valide, retourne l'utilisateur connecte
  */
 
  Utilisateur* boucleAuthentification(Systeme& systeme)
@@ -127,7 +127,7 @@ void afficherMenuAuthentification()
             if (!user)
             {
                 essais++;
-                std::cout << "\n[ERREUR] Identifiants incorrects. Veuillez réessayer.\n";
+                std::cout << "\n[ERREUR] Identifiants incorrects. Veuillez reessayer.\n";
                 std::cout << NB_TENTATIVES_CONNEXION - essais << " tentatives restantes / " << NB_TENTATIVES_CONNEXION << std::endl;
             }
          }
@@ -144,8 +144,8 @@ void afficherMenuAuthentification()
                 bool ok = false;
                 while (!ok)
                 {
-                    std::cout << "Premiere connexion, veuillez choisir un nouveau mot de passe.\n";
-                    std::cout << "Nouveau mot de passe : ";
+                    std::cout << "Premiere connexion, veuillez choisir un mot de passe.\n";
+                    std::cout << "Mot de passe : ";
                     std::getline(std::cin, nouveauMdp);
                     std::cout << "Confirmez le mot de passe : ";
                     std::getline(std::cin, confirmation);
@@ -161,7 +161,7 @@ void afficherMenuAuthentification()
                         else if (dynamic_cast<Administrateur*>(user))
                             systeme.sauvegarderUtilisateursAdmins();
 
-                        std::cout << "[SUCCES] Mot de passe mis a jour.\n";
+                        std::cout << "[SUCCES] Mot de passe enregistre.\n";
                         ok = true;
                     }
                     else
@@ -179,19 +179,19 @@ void afficherMenuAuthentification()
          if (!userConnecte)
          {
              essais++;
-             std::cout << "\n[ERREUR] Identifiants incorrects. Veuillez réessayer.\n";
+             std::cout << "\n[ERREUR] Identifiants incorrects. Veuillez reessayer.\n";
              std::cout << NB_TENTATIVES_CONNEXION - essais << " tentatives restantes / " << NB_TENTATIVES_CONNEXION << std::endl;
          }
          else
          {
-             std::cout << "\n[SUCCES] Authentification réussie.\n";
+             std::cout << "\n[SUCCES] Authentification reussie.\n";
              std::cout << "Bienvenue " << userConnecte -> getNom() << " " << userConnecte -> getPrenom() << " !\n";
          }
      }
 
      if (!userConnecte)
      {
-         std::cout << "[ECHEC] Trop de tentatives sans resultat. Veuillez recommencer ou contacter un administrateur.\n";
+         std::cout << "[ECHEC] Trop de tentatives sans resultat. Veuillez recommencer ou contacter un administrateur si le probleme persiste.\n";
          pauseConsole();
      }
      return userConnecte;
@@ -209,8 +209,8 @@ int main() {
     // Initialisation de système
     Systeme systeme;
 
-    // Chargement des données depuis les fichiers
-    std::cout << "[ Chargement des données ]...\n";
+    // Chargement des donnees depuis les fichiers
+    std::cout << "[ Chargement des donnees ]...\n";
     systeme.chargerDonnees();
 
     bool systemeEnExecution = true;
@@ -244,17 +244,19 @@ int main() {
                     if (confirmQuit == 'o' || confirmQuit == 'O')
                     {
                         //Quitter
-                        std::cout << "\n [ Sauvegarde des données en cours... ]\n";
+                        std::cout << "\n [ Sauvegarde des donnees en cours... ]\n";
                         systeme.sauvegarderDonnees();
-                        std::cout << "[ Données savegardées. ]\n";
+                        std::cout << "[ Donnees savegardees. ]\n";
                         std::cout << "\tFermeture du système.\n" << std::endl;
                         systemeEnExecution = false;
                     }
                     break;
                 }
             default :
-                std::cout << "[ERREUR] Choix invalide. Veuillez réessayer." << std::endl;
-                pauseConsole();
+                {
+                    std::cout << "[ERREUR] Choix invalide. Veuillez reessayer." << std::endl;
+                    pauseConsole();
+                }
         }
     }
 

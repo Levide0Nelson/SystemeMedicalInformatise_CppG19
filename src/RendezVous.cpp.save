@@ -3,7 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <stdexcept>
-#include <iom
+#include <iomanip>
 
 RendezVous::RendezVous(int idRDV, int idPatient, int idProfessionnel, const std::string& date, const std::string& heure, const std::string& motif)
                         : m_idRDV(idRDV), m_idPatient(idPatient), m_idProfessionnel(idProfessionnel), m_date(date), m_heure(heure), m_motif(motif)
@@ -118,8 +118,8 @@ void RendezVous::afficherRDV() const
     // En-têtes de colonnes
     std::cout << std::left
               << std::setw(5)  << "ID"
-              << std::setw(5) << "ID Patient"
-              << std::setw(5) << "ID professionnel"
+              << std::setw(15) << "ID Patient"
+              << std::setw(20) << "ID Professionnel"
               << std::setw(12) << "Date"
               << std::setw(8)  << "Heure"
               << std::setw(30) << "Motif"
@@ -130,9 +130,9 @@ void RendezVous::afficherRDV() const
     // Lignes
         std::cout << std::left
                   << std::setw(5)  << m_idRDV
-                  << std::setw(5) << m_idPatient
-                  << std::setw(5) << m_idProfessionnel    /** Mettre les noms et prénoms pour les pros et patients au lieu des id*/
-                  << std::setw(12) << m_date
+                  << std::setw(15) << m_idPatient
+                  << std::setw(15) << m_idProfessionnel    /** Mettre les noms et prénoms pour les pros et patients au lieu des id*/
+                  << std::setw(18) << m_date
                   << std::setw(8)  << m_heure
                   << std::setw(30) << m_motif
                   << "\n";

@@ -107,20 +107,20 @@ void Consultation::afficherDetailsConsultation() const
               << std::setw(12) << "Date"
               << std::setw(30) << "Motif"
               << std::setw(35) << "Observations"
-              << std::setw(5)  << "ID Patient"
-              << std::setw(25)  << "Nom complet du Professionnel"            /**Améliorations avec les noms et prénoms + id si possible*/
+              << std::setw(15)  << "ID Patient"
+              << std::setw(25)  << "Nom complet du Professionnel"        
               << "\n";
 
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(130, '-') << "\n";
 
     // Lignes
         std::cout << std::left
                   << std::setw(5)  << m_idConsultation
                   << std::setw(12) << m_dateConsultation
-                  << std::setw(3) << m_motif
+                  << std::setw(30) << m_motif
                   << std::setw(35) << m_observations
-                  << std::setw(5)  << m_idPatient
+                  << std::setw(15)  << m_idPatient
                   << std::setw(25)  << m_nomCompletPro
                   << "\n";
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(130, '-') << "\n";
 }

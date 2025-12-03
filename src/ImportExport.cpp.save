@@ -226,6 +226,7 @@ void ImportExport::exporterTousLesPatientsEnCsv(Systeme& systeme, const std::str
 }
 
 
+
 void ImportExport::exporterDossierPatientEnCsv(int idPatient, Systeme& systeme, const std::string& chemin)
 {
     Patient* patient = systeme.rechercherPatient(idPatient);
@@ -307,6 +308,7 @@ void ImportExport::exporterDossierPatientEnCsv(int idPatient, Systeme& systeme, 
     std::cout << "[SUCCES] Export CSV du dossier du patient #" << idPatient
               << " dans " << nomFichier << "\n";
 }
+
 
 
 

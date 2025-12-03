@@ -6,7 +6,7 @@
 
 void pauseConsole()
 {
-    std::cout << "\nAppuyez sur <<Enter>> pour continuer...";
+    std::cout << "\nAppuyez sur <<Enter>> pour continuer...\n";
     std::string tmp;
     std::getline(std::cin, tmp);
 }

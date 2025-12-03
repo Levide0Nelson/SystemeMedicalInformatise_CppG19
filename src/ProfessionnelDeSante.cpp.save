@@ -62,8 +62,8 @@ void ProfessionnelDeSante::afficherMenu() const
     std::cout << "3. Rechercher un patient\n";
     std::cout << "4. Consulter un dossier medical\n";
     std::cout << "5. Creer une consultation\n";
-    std::cout << "6. Ajouter/modifier un antecedent\n";
-    std::cout << "7. Prescrire un examen ou medicament\n";
+    std::cout << "6. Ajouter un antecedent\n";
+    std::cout << "7. Prescrire un medicament\n";
     std::cout << "8. Afficher les administrateurs ayant une habilitation speciale\n";
     std::cout << "9. Accorder une habilitation speciale a un administrateur systeme\n";
     std::cout << "10. Retirer une habilitation accordee a un administrateur systeme\n";

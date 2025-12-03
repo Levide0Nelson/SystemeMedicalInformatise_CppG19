@@ -98,9 +98,9 @@ void Antecedent::afficherDetailsAntecedent() const
     // En-têtes de colonnes
     std::cout << std::left
               << std::setw(5)  << "N°"
-              << std::setw(5)  << "ID Patient"
-              << std::setw(12) << "Type"
-              << std::setw(20) << "Description (falcutatif)"
+              << std::setw(15)  << "ID Patient"
+              << std::setw(18) << "Type"
+              << std::setw() << "Description (falcutatif)"
               << std::setw(12) << "Date"
               << "\n";
 

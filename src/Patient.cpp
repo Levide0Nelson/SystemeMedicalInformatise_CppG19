@@ -177,30 +177,30 @@ Patient Patient::fromCSV(const std::string& line)
 
 void Patient::afficherInfos() const
 {
-    std::cout << "\n===== LISTE DES PATIENTS =====\n\n";
+    std::cout << "\n===== INFORMATIONS PATIENT =====\n\n";
 
     // En-têtes de colonnes
     std::cout << std::left
               << std::setw(5)  << "ID"
-              << std::setw(15) << "Nom"
-              << std::setw(20) << "Prenom(s)"
-              << std::setw(12) << "Date Naissance"
-              << std::setw(8)  << "Genre"
-              << std::setw(20) << "Telephone"
-              << std::setw(25) << "Email"
+              << std::setw(20) << "Nom"
+              << std::setw(40) << "Prenom(s)"
+              << std::setw(18) << "Date Naissance"
+              << std::setw(10)  << "Genre"
+              << std::setw(12) << "Telephone"
+              << std::setw(20) << "Email"
               << "\n";
 
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(130, '-') << "\n";
 
     // Lignes
         std::cout << std::left
                   << std::setw(5)  << m_idPatient
-                  << std::setw(15) << m_nomPatient
-                  << std::setw(20) << m_prenomPatient
-                  << std::setw(12) << m_dateDeNaissance
-                  << std::setw(8)  << m_genre
-                  << std::setw(20) << m_telephone
-                  << std::setw(25) << m_email
+                  << std::setw(20) << m_nomPatient
+                  << std::setw(40) << m_prenomPatient
+                  << std::setw(18) << m_dateDeNaissance
+                  << std::setw(10)  << m_genre
+                  << std::setw(12) << m_telephone
+                  << std::setw(20) << m_email
                   << "\n";
-    std::cout << std::string(100, '-') << "\n";
+    std::cout << std::string(130, '-') << "\n";
 }

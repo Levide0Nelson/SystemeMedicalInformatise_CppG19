@@ -10,7 +10,7 @@
 
 
 
-Systeme::Systeme() : m_nextIdPatient(1), m_nextIdConsultation(1), m_nextIdAntecedent(1), m_nextIdRDV(1), m_utilisateurConnecte(nullptr)
+Systeme::Systeme() : m_nextIdPatient(1), m_nextIdConsultation(1), m_nextIdAntecedent(1),m_nextIdPrescription(1), m_nextIdRDV(1), m_utilisateurConnecte(nullptr)
 {
 
 }
@@ -135,7 +135,7 @@ void Systeme::chargerAdmins()
             m_admins.push_back(admin);
 
 
-            // Mise à jour du prochain ID
+            // Mise a jour du prochain ID
             if (id >= m_nextIdPatient)
                 m_nextIdPatient = id +1;
         }
@@ -750,6 +750,7 @@ Patient* Systeme::rechercherPatient(int idPatient)
 
 void Systeme::afficherTousPatients() const
 {
+    nettoyerEcran();
     if (m_patients.empty())
     {
         std::cout << "Aucun patient pour le moment\n" << std::endl;
@@ -829,7 +830,7 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
     {
         try
         {
-            std::cout << "Date (DD-MM-YYYY) : ";
+            std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
             std::getline(std::cin, date);
             Date::validerFormat(date);
             dateValide = true;
@@ -858,7 +859,7 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
     std::cout << "Motif : ";
     std::getline(std::cin, motif);
 
-    // Vérification de la disponibilité ou non des créneaux
+    // Verification de la disponibilite ou non des creneaux
 
     for (const auto& rdv : m_rendezVous)
     {
@@ -873,8 +874,7 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
     RendezVous nouveauRDV(m_nextIdRDV++, idPatient, idPro, date, heure, motif);
     m_rendezVous.push_back(nouveauRDV);
     sauvegarderRDV();
-    std::cout << "[SUCCES] Nouveau Rendez-vous cree.\n" << std::endl;
-    pauseConsole();
+    std::cout << "[SUCCES] Nouveau Rendez-vous cree avec l'ID " << nouveauRDV.getIdRDV() <<". \n" << std::endl;
 }
 
 
@@ -994,7 +994,7 @@ void Systeme::menuGestionUtilisateurs()
                 std::getline(std::cin, prenom);
                 std::cout << "Username/Login : ";
                 std::getline(std::cin, login);
-                std::cout << "Password : ";
+                std::cout << "Password par defaut (ce champ peut etre vide) : ";
                 std::getline(std::cin, password);
 
                 Administrateur admin(genererIdPatient(), nom, prenom, login, password, false);
@@ -1017,7 +1017,7 @@ void Systeme::menuGestionUtilisateurs()
                     std::getline(std::cin, prenom);
                     std::cout << "Username : ";
                     std::getline(std::cin, login);
-                    std::cout << "Password : ";
+                    std::cout << "Password par defaut (ce champ peut etre vide) : ";
                     std::getline(std::cin, password);
                     std::cout << "Role (medecin/infirmier/pharmacien) : ";
                     std::getline(std::cin, role);
@@ -1112,8 +1112,14 @@ void Systeme::menuInscriptionPatient()
     std::getline(std::cin, nom);
     std::cout << "Prenom : ";
     std::getline(std::cin, prenom);
-    std::cout << "Date de naissance (DD-MM-YYYY) : ";
-    std::getline(std::cin, dateNaissance);
+    bool dateValide = false;
+    while (!dateValide)
+    {
+        std::cout << "Date de naissance (DD-MM-YYYY ou DD/MM/YYYY) : ";
+        std::getline(std::cin, dateNaissance);
+        Date::validerFormat(dateNaissance);
+        dateValide = true;
+    }
     std::cout << "Genre (M/F) : ";
     std::getline(std::cin, genre);
     std::cout << "Adresse : ";
@@ -1233,7 +1239,7 @@ void Systeme::menuCreerConsultation()
     {
         try
         {
-            std::cout << "Date (DD-MM-YYYY) : ";
+            std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
             std::getline(std::cin, date);
             Date::validerFormat(date);
             dateValide = true;
@@ -1279,7 +1285,7 @@ void Systeme::menuAjouterAntecedent()
     std::getline(std::cin, type);
     std::cout << "Description : ";
     std::getline(std::cin, description);
-    std::cout << "Date (DD-MM-YYYY) : ";
+    std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
     std::getline(std::cin, date);
 
     int idAnt = ajouterAntecedent(idPatient, type, description, date);
@@ -1295,7 +1301,7 @@ void Systeme::menuArchivageDossiers()
     nettoyerEcran();
     std::cout << "\n===== ARCHIVAGE D'UN DOSSIER PATIENT =====\n\n";
     int idPatient;
-    std::cout << "Entrer l'ID du patient à archiver : ";
+    std::cout << "Entrer l'ID du patient a archiver : ";
     std::cin >> idPatient;
     std::cin.ignore();
     DossierMedical* dossier = rechercherDossier(idPatient);
@@ -1307,7 +1313,7 @@ void Systeme::menuArchivageDossiers()
     }
     if (dossier -> estArchive())
     {
-        std::cout << "[INFO] Ce dossier est dejà archive.\n";
+        std::cout << "[INFO] Ce dossier est deja archive.\n";
         return;
     }
     dossier->setArchive(true);
@@ -1346,7 +1352,7 @@ void Systeme::menuAjouterPrescriptions()
     {
         try
         {
-            std::cout << "Date (DD-MM-YYYY) : ";
+            std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
             std::getline(std::cin, date);
             Date::validerFormat(date);
             dateValide = true;
@@ -1488,7 +1494,9 @@ void Systeme::menuImportExport()
                                     break;
                                 }
                             case 3 :
-                                break;
+                                {
+                                    break;
+                                }
                             default :
                                 {
                                     std::cout << "[ERREUR] Choix invalide.\n" << std::endl;
@@ -1530,7 +1538,9 @@ void Systeme::menuImportExport()
                                     break;
                                 }
                             case 3 :
-                                break;
+                                {
+                                    break;
+                                }
                             default :
                                 {
                                     std::cout << "[ERREUR] Choix invalide.\n" << std::endl;
@@ -1570,7 +1580,9 @@ void Systeme::menuImportExport()
                                     break;
                                 }
                             case 3 :
-                                break;
+                                {
+                                    break;
+                                }
                             default :
                                 {
                                     std::cout << "[ERREUR] Choix invalide.\n" << std::endl;
@@ -1745,13 +1757,13 @@ void Systeme::accorderHabilitation()
         {
             if (admin.getAutorisation())
             {
-                std::cout << "Habilitation dejà accordee a l'administrateur " << nom << " " << prenom << std::endl;
+                std::cout << "Habilitation deja accordee a l'administrateur " << nom << " " << prenom << std::endl;
                 return;
             }
             bool repeter = true;
             while (repeter)
             {
-                std::cout << "Etes-vous sûr(e) de vouloir accorder une habilitation a l'administrateur " << nom << " " << prenom << " ? (o/n) : ";
+                std::cout << "Etes-vous sur(e) de vouloir accorder une habilitation a l'administrateur " << nom << " " << prenom << " ? (o/n) : ";
                 std::cin >> choix;
 
                 if (choix == 'o' || choix == 'O')
@@ -1770,6 +1782,7 @@ void Systeme::accorderHabilitation()
         else
         {
             std::cout << "L' administrateur " << nom << " " << prenom << " n'est pas repertorie\n";
+            return;
         }
     }
 }
@@ -1793,7 +1806,7 @@ void Systeme::retirerHabilitation()
             bool repeter = true;
             while (repeter)
             {
-                std::cout << "Etes-vous sûr(e) de vouloir retirer l'habilitation speciale a l'administrateur " << nom << " " << prenom << " ? (o/n) : ";
+                std::cout << "Etes-vous sur(e) de vouloir retirer l'habilitation speciale a l'administrateur " << nom << " " << prenom << " ? (o/n) : ";
                 std::cin >> choix;
                 std::cin.ignore();
 
