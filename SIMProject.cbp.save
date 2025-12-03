@@ -34,6 +34,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add option="-static" />
+			<Add option="-static-libgcc" />
+			<Add option="-static-libstdc++" />
+		</Linker>
 		<Unit filename="Enumerations.h" />
 		<Unit filename="include/Administrateur.h" />
 		<Unit filename="include/Antecedent.h" />

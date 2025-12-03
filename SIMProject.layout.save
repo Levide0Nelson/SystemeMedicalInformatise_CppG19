@@ -2,106 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\Systeme.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Utilisateur.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4334" topLine="106" />
-		</Cursor>
-	</File>
-	<File name="src\Antecedent.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2229" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="15" />
-			<Collapse line="21" />
-			<Collapse line="27" />
-			<Collapse line="33" />
-			<Collapse line="39" />
-			<Collapse line="47" />
-			<Collapse line="54" />
-			<Collapse line="61" />
-			<Collapse line="68" />
-			<Collapse line="76" />
-			<Collapse line="94" />
-		</Folding>
-	</File>
-	<File name="src\RendezVous.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2932" topLine="43" />
-		</Cursor>
-		<Folding>
-			<Collapse line="15" />
-			<Collapse line="22" />
-			<Collapse line="29" />
-			<Collapse line="36" />
-			<Collapse line="43" />
-			<Collapse line="50" />
-			<Collapse line="58" />
-			<Collapse line="66" />
-			<Collapse line="73" />
-			<Collapse line="82" />
-			<Collapse line="90" />
-			<Collapse line="114" />
-		</Folding>
-	</File>
-	<File name="include\RendezVous.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="63" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="include\Administrateur.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="196" topLine="10" />
-		</Cursor>
-	</File>
-	<File name="include\ProfessionnelDeSante.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1432" topLine="10" />
-		</Cursor>
-	</File>
-	<File name="src\Administrateur.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="920" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="9" />
-			<Collapse line="16" />
-			<Collapse line="23" />
-			<Collapse line="30" />
-			<Collapse line="39" />
-		</Folding>
-	</File>
-	<File name="include\Antecedent.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1140" topLine="10" />
-		</Cursor>
-	</File>
-	<File name="include\Date.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="503" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\UtilConsole.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="258" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="14" />
-			<Collapse line="27" />
-		</Folding>
-	</File>
-	<File name="src\ProfessionnelDeSante.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1054" topLine="37" />
-		</Cursor>
-		<Folding>
-			<Collapse line="48" />
-		</Folding>
-	</File>
-	<File name="include\ImportExport.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="777" topLine="0" />
+			<Cursor1 position="1343" topLine="11" />
 		</Cursor>
 	</File>
 	<File name="src\Prescription.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -120,33 +23,36 @@
 			<Collapse line="79" />
 		</Folding>
 	</File>
-	<File name="include\DossierMedical.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1288" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="src\Patient.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2816" topLine="100" />
+			<Cursor1 position="3652" topLine="8" />
 		</Cursor>
 		<Folding>
-			<Collapse line="32" />
-			<Collapse line="39" />
-			<Collapse line="47" />
-			<Collapse line="54" />
-			<Collapse line="63" />
-			<Collapse line="71" />
-			<Collapse line="79" />
-			<Collapse line="89" />
-			<Collapse line="98" />
-			<Collapse line="106" />
-			<Collapse line="114" />
-			<Collapse line="122" />
-			<Collapse line="130" />
-			<Collapse line="139" />
-			<Collapse line="147" />
-			<Collapse line="156" />
-			<Collapse line="178" />
+			<Collapse line="13" />
+			<Collapse line="45" />
+			<Collapse line="77" />
+			<Collapse line="92" />
+			<Collapse line="110" />
+			<Collapse line="208" />
+		</Folding>
+	</File>
+	<File name="src\Consultation.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2665" topLine="35" />
+		</Cursor>
+		<Folding>
+			<Collapse line="18" />
+			<Collapse line="24" />
+			<Collapse line="30" />
+			<Collapse line="36" />
+			<Collapse line="42" />
+			<Collapse line="48" />
+			<Collapse line="56" />
+			<Collapse line="62" />
+			<Collapse line="68" />
+			<Collapse line="75" />
+			<Collapse line="82" />
+			<Collapse line="100" />
 		</Folding>
 	</File>
 	<File name="src\Utilisateur.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -170,97 +76,205 @@
 			<Collapse line="111" />
 		</Folding>
 	</File>
-	<File name="src\Systeme.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\DossierMedical.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9797" topLine="339" />
+			<Cursor1 position="1288" topLine="25" />
+		</Cursor>
+	</File>
+	<File name="Enumerations.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="232" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="21" />
-			<Collapse line="40" />
-			<Collapse line="65" />
-			<Collapse line="92" />
-			<Collapse line="178" />
-			<Collapse line="231" />
-			<Collapse line="276" />
-			<Collapse line="327" />
-			<Collapse line="377" />
-			<Collapse line="398" />
-			<Collapse line="446" />
-			<Collapse line="482" />
-			<Collapse line="508" />
-			<Collapse line="528" />
-			<Collapse line="550" />
-			<Collapse line="570" />
-			<Collapse line="591" />
-			<Collapse line="613" />
-			<Collapse line="635" />
-			<Collapse line="658" />
-			<Collapse line="679" />
-			<Collapse line="687" />
-			<Collapse line="696" />
-			<Collapse line="703" />
-			<Collapse line="710" />
-			<Collapse line="720" />
-			<Collapse line="731" />
-			<Collapse line="741" />
-			<Collapse line="751" />
-			<Collapse line="767" />
-			<Collapse line="777" />
-			<Collapse line="785" />
-			<Collapse line="799" />
-			<Collapse line="812" />
-			<Collapse line="883" />
-			<Collapse line="905" />
-			<Collapse line="932" />
-			<Collapse line="939" />
-			<Collapse line="946" />
-			<Collapse line="955" />
-			<Collapse line="1106" />
-			<Collapse line="1142" />
-			<Collapse line="1188" />
-			<Collapse line="1219" />
-			<Collapse line="1265" />
-			<Collapse line="1299" />
-			<Collapse line="1326" />
-			<Collapse line="1381" />
-			<Collapse line="1442" />
-			<Collapse line="1619" />
-			<Collapse line="1630" />
-			<Collapse line="1644" />
-			<Collapse line="1651" />
-			<Collapse line="1661" />
-			<Collapse line="1671" />
-			<Collapse line="1680" />
-			<Collapse line="1688" />
-			<Collapse line="1696" />
-			<Collapse line="1721" />
-			<Collapse line="1744" />
-			<Collapse line="1792" />
-			<Collapse line="1833" />
-			<Collapse line="1869" />
+			<Collapse line="5" />
+			<Collapse line="16" />
 		</Folding>
 	</File>
-	<File name="include\UtilConsole.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\RendezVous.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="203" topLine="0" />
+			<Cursor1 position="63" topLine="11" />
 		</Cursor>
+	</File>
+	<File name="include\ProfessionnelDeSante.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="372" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Antecedent.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1140" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="include\ImportExport.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="777" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Antecedent.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2229" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="15" />
+			<Collapse line="21" />
+			<Collapse line="27" />
+			<Collapse line="33" />
+			<Collapse line="39" />
+			<Collapse line="47" />
+			<Collapse line="54" />
+			<Collapse line="61" />
+			<Collapse line="68" />
+			<Collapse line="76" />
+			<Collapse line="94" />
+		</Folding>
+	</File>
+	<File name="src\UtilConsole.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1151" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="9" />
+			<Collapse line="16" />
+			<Collapse line="29" />
+			<Collapse line="37" />
+		</Folding>
+	</File>
+	<File name="include\Date.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="503" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Systeme.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="87221" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="22" />
+			<Collapse line="41" />
+			<Collapse line="66" />
+			<Collapse line="93" />
+			<Collapse line="179" />
+			<Collapse line="232" />
+			<Collapse line="277" />
+			<Collapse line="328" />
+			<Collapse line="378" />
+			<Collapse line="399" />
+			<Collapse line="447" />
+			<Collapse line="483" />
+			<Collapse line="509" />
+			<Collapse line="529" />
+			<Collapse line="551" />
+			<Collapse line="571" />
+			<Collapse line="592" />
+			<Collapse line="614" />
+			<Collapse line="636" />
+			<Collapse line="659" />
+			<Collapse line="680" />
+			<Collapse line="688" />
+			<Collapse line="697" />
+			<Collapse line="704" />
+			<Collapse line="711" />
+			<Collapse line="721" />
+			<Collapse line="732" />
+			<Collapse line="742" />
+			<Collapse line="752" />
+			<Collapse line="768" />
+			<Collapse line="778" />
+			<Collapse line="786" />
+			<Collapse line="800" />
+			<Collapse line="813" />
+			<Collapse line="915" />
+			<Collapse line="945" />
+			<Collapse line="972" />
+			<Collapse line="979" />
+			<Collapse line="986" />
+			<Collapse line="995" />
+			<Collapse line="1422" />
+			<Collapse line="1526" />
+			<Collapse line="1587" />
+			<Collapse line="1632" />
+			<Collapse line="1711" />
+			<Collapse line="1785" />
+			<Collapse line="1827" />
+			<Collapse line="1928" />
+			<Collapse line="1997" />
+			<Collapse line="2239" />
+			<Collapse line="2252" />
+			<Collapse line="2259" />
+			<Collapse line="2266" />
+			<Collapse line="2273" />
+			<Collapse line="2283" />
+			<Collapse line="2293" />
+			<Collapse line="2302" />
+			<Collapse line="2310" />
+			<Collapse line="2318" />
+			<Collapse line="2343" />
+			<Collapse line="2366" />
+			<Collapse line="2428" />
+			<Collapse line="2483" />
+			<Collapse line="2516" />
+			<Collapse line="2530" />
+			<Collapse line="2559" />
+		</Folding>
+	</File>
+	<File name="include\Systeme.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3912" topLine="99" />
+		</Cursor>
+	</File>
+	<File name="src\ProfessionnelDeSante.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="820" topLine="14" />
+		</Cursor>
+		<Folding>
+			<Collapse line="19" />
+			<Collapse line="26" />
+			<Collapse line="35" />
+			<Collapse line="42" />
+			<Collapse line="49" />
+			<Collapse line="57" />
+		</Folding>
+	</File>
+	<File name="src\Patient.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3420" topLine="98" />
+		</Cursor>
+		<Folding>
+			<Collapse line="25" />
+			<Collapse line="32" />
+			<Collapse line="39" />
+			<Collapse line="47" />
+			<Collapse line="54" />
+			<Collapse line="63" />
+			<Collapse line="71" />
+			<Collapse line="79" />
+			<Collapse line="89" />
+			<Collapse line="98" />
+			<Collapse line="106" />
+			<Collapse line="114" />
+			<Collapse line="122" />
+			<Collapse line="130" />
+			<Collapse line="139" />
+			<Collapse line="147" />
+			<Collapse line="156" />
+			<Collapse line="178" />
+		</Folding>
 	</File>
 	<File name="include\Consultation.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="697" topLine="12" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Administrateur.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6627" topLine="8" />
+			<Cursor1 position="74" topLine="1" />
 		</Cursor>
 		<Folding>
-			<Collapse line="13" />
-			<Collapse line="45" />
-			<Collapse line="77" />
-			<Collapse line="92" />
-			<Collapse line="110" />
-			<Collapse line="200" />
+			<Collapse line="10" />
+			<Collapse line="17" />
+			<Collapse line="24" />
+			<Collapse line="31" />
+			<Collapse line="40" />
 		</Folding>
 	</File>
 	<File name="src\DossierMedical.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -284,19 +298,9 @@
 			<Collapse line="132" />
 		</Folding>
 	</File>
-	<File name="include\Utilisateur.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="475" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="include\Patient.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="11" />
-		</Cursor>
-	</File>
 	<File name="src\ImportExport.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6938" topLine="23" />
+			<Cursor1 position="6938" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="11" />
@@ -310,24 +314,10 @@
 			<Collapse line="348" />
 		</Folding>
 	</File>
-	<File name="src\Consultation.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Patient.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2665" topLine="35" />
+			<Cursor1 position="336" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="18" />
-			<Collapse line="24" />
-			<Collapse line="30" />
-			<Collapse line="36" />
-			<Collapse line="42" />
-			<Collapse line="48" />
-			<Collapse line="56" />
-			<Collapse line="62" />
-			<Collapse line="68" />
-			<Collapse line="75" />
-			<Collapse line="82" />
-			<Collapse line="100" />
-		</Folding>
 	</File>
 	<File name="src\Date.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -338,5 +328,34 @@
 			<Collapse line="56" />
 			<Collapse line="90" />
 		</Folding>
+	</File>
+	<File name="src\RendezVous.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2932" topLine="43" />
+		</Cursor>
+		<Folding>
+			<Collapse line="15" />
+			<Collapse line="22" />
+			<Collapse line="29" />
+			<Collapse line="36" />
+			<Collapse line="43" />
+			<Collapse line="50" />
+			<Collapse line="58" />
+			<Collapse line="66" />
+			<Collapse line="73" />
+			<Collapse line="82" />
+			<Collapse line="90" />
+			<Collapse line="114" />
+		</Folding>
+	</File>
+	<File name="include\Administrateur.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1210" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="include\UtilConsole.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="267" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

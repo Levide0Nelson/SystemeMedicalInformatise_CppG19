@@ -152,16 +152,41 @@ void Systeme::chargerAdmins()
     if (m_admins.empty() || premiereConnexion)
     {
         std::cout << "[INFO] Creation du premier administrateur systeme requis.\n";
+        std::cout << "\t Pour quitter entrez 0\n";
         pauseConsole();
         std::string nom, prenom, login, password;
         std::cout << "Nom : ";
         std::getline(std::cin, nom);
+        if (nom == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            return;
+        }
         std::cout << "Prenom : ";
         std::getline(std::cin, prenom);
+        if (prenom == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            return;
+        }
         std::cout << "Login/Username : ";
         std::getline(std::cin, login);
+        if (login == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            return;
+        }
         std::cout << "Password : ";
         std::getline(std::cin, password);
+        if (password == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            return;
+        }
 
         Administrateur admin(m_nextIdPatient++, nom, prenom, login, password,false,false);
         m_admins.push_back(admin);

@@ -152,16 +152,37 @@ void Systeme::chargerAdmins()
     if (m_admins.empty() || premiereConnexion)
     {
         std::cout << "[INFO] Creation du premier administrateur systeme requis.\n";
+        std::cout << "\t Pour quitter entrez 0\n";
         pauseConsole();
         std::string nom, prenom, login, password;
         std::cout << "Nom : ";
         std::getline(std::cin, nom);
+        if (nom == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            return;
+        }
         std::cout << "Prenom : ";
         std::getline(std::cin, prenom);
+        if (prenom == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            return;
+        }
         std::cout << "Login/Username : ";
         std::getline(std::cin, login);
+        if (login == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            return;
+        }
         std::cout << "Password : ";
         std::getline(std::cin, password);
+        if (password == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            return;
+        }
 
         Administrateur admin(m_nextIdPatient++, nom, prenom, login, password,false,false);
         m_admins.push_back(admin);
@@ -1646,7 +1667,6 @@ void Systeme::menuCreerConsultation()
 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
-        continue;
     }
     std::cin.ignore();
     if (idPatient == 0)
@@ -1726,7 +1746,6 @@ void Systeme::menuAjouterAntecedent()
 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
-        continue;
     }
     std::cin.ignore();
     if (idPatient == 0)
@@ -1799,7 +1818,6 @@ void Systeme::menuArchivageDossiers()
 
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
-            continue;
         }
         std::cin.ignore();
     if (idPatient == 0)
@@ -1843,7 +1861,6 @@ void Systeme::menuAjouterPrescriptions()
 
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
-        continue;
     }
         std::cin.ignore();
     if (idPatient == 0)
@@ -1868,7 +1885,6 @@ void Systeme::menuAjouterPrescriptions()
 
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
-            continue;
         }
         std::cin.ignore();
     if (idConsult == 0)
