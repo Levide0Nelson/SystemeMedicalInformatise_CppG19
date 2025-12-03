@@ -12,7 +12,7 @@ class Patient
 {
     public:
         // Constructeur
-        Patient(int idPatient, const std::string& nomPatient, const std::string& prenomPatient, const std::string& dateNaissance,
+        Patient(int idPatient, const std::string& nomPatient, const std::string& prenomPatient, const std::string& dateNaissance, int numAssurance,
                  const std::string& genre, const std::string& adresse, const std::string& telephone, const std::string& email);
 
         ~Patient();
@@ -48,6 +48,7 @@ class Patient
         std::string m_nomPatient;
         std::string m_prenomPatient;
         std::string m_dateDeNaissance; // Format JJ/MM/AAAA
+        int  m_numAssurance;
         std::string m_genre;
         std::string m_adresse;
         std::string m_telephone;

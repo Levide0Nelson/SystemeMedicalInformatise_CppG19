@@ -7,9 +7,9 @@
 
 
 
-Patient::Patient(int idPatient, const std::string& nomPatient, const std::string& prenomPatient, const std::string& dateNaissance,
+Patient::Patient(int idPatient, const std::string& nomPatient, const std::string& prenomPatient, const std::string& dateNaissance, int numAssurance,
                  const std::string& genre, const std::string& adresse, const std::string& telephone, const std::string& email) :
-                     m_idPatient(idPatient), m_nomPatient(nomPatient), m_prenomPatient(prenomPatient), m_dateDeNaissance(dateNaissance),
+                     m_idPatient(idPatient), m_nomPatient(nomPatient), m_prenomPatient(prenomPatient), m_dateDeNaissance(dateNaissance), m_numAssurance(numAssurance),
                      m_genre(genre), m_adresse(adresse), m_telephone(telephone), m_email(email)
 {
 
@@ -146,7 +146,7 @@ void Patient::setEmail(const std::string& email)
 
 std::string Patient::toCSV() const
 {
-    return std::to_string(m_idPatient) + ";" + m_nomPatient + ";" + m_prenomPatient + ";" + m_dateDeNaissance + ";" + m_genre + ";" + m_adresse + ";" + m_telephone + ";" + m_email;
+    return std::to_string(m_idPatient) + ";" + m_nomPatient + ";" + m_prenomPatient + ";" + m_dateDeNaissance + ";" + std::to_string(m_numAssurance) + ";" + m_genre + ";" + m_adresse + ";" + m_telephone + ";" + m_email;
 }
 
 
@@ -164,11 +164,11 @@ Patient Patient::fromCSV(const std::string& line)
         elmts.push_back(item);
     }
 
-    if (elmts.size() != 8)
+    if (elmts.size() != 9)
     {
         throw std::invalid_argument("Format CSV incorrect pour le patient");
     }
-    return Patient(std::stoi(elmts[0]), elmts[1], elmts[2], elmts[3], elmts[4],elmts[5],elmts[6], elmts[7]);
+    return Patient(std::stoi(elmts[0]), elmts[1], elmts[2], elmts[3],std::stoi(elmts[4]), elmts[5],elmts[6],elmts[7], elmts[8]);
 }
 
 
@@ -185,12 +185,13 @@ void Patient::afficherInfos() const
               << std::setw(20) << "Nom"
               << std::setw(40) << "Prenom(s)"
               << std::setw(18) << "Date Naissance"
+              << std::setw(15) << "Num Assurance"
               << std::setw(10)  << "Genre"
               << std::setw(12) << "Telephone"
               << std::setw(20) << "Email"
               << "\n";
 
-    std::cout << std::string(130, '-') << "\n";
+    std::cout << std::string(156, '-') << "\n";
 
     // Lignes
         std::cout << std::left
@@ -198,9 +199,10 @@ void Patient::afficherInfos() const
                   << std::setw(20) << m_nomPatient
                   << std::setw(40) << m_prenomPatient
                   << std::setw(18) << m_dateDeNaissance
+                  << std::setw(15) << m_numAssurance
                   << std::setw(10)  << m_genre
                   << std::setw(12) << m_telephone
                   << std::setw(20) << m_email
                   << "\n";
-    std::cout << std::string(130, '-') << "\n";
+    std::cout << std::string(156, '-') << "\n";
 }

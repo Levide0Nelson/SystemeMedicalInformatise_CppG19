@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Enumerations.h" />
 		<Unit filename="include/Administrateur.h" />
 		<Unit filename="include/Antecedent.h" />
 		<Unit filename="include/Consultation.h" />

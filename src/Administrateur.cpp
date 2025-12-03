@@ -3,6 +3,7 @@
 #include "UtilConsole.h"
 
 
+
 Administrateur::Administrateur(int idAdmin, const std::string& nomAdmin, const std::string& prenomAdmin, const std::string& loginAdmin,
                        const std::string& mdpAdmin, bool accessMedical, bool premiereConnexion)
                        : Utilisateur(idAdmin,nomAdmin,prenomAdmin,loginAdmin,mdpAdmin,"Administrateur",premiereConnexion),
@@ -48,3 +49,5 @@ void Administrateur::afficherMenu() const
     std::cout << "6. Import/Export de donnees (.csv)\n";
     std::cout << "0. Deconnexion\n";
 }
+
+

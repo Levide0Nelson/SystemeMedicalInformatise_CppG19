@@ -12,11 +12,11 @@ class Patient
 {
     public:
         // Constructeur
-        Patient(int idPatient, const std::string& nomPatient, const std::string& prenomPatient, const std::string& dateNaissance,
+        Patient(int idPatient, const std::string& nomPatient, const std::string& prenomPatient, const std::string& dateNaissance, int numAssurance,
                  const std::string& genre, const std::string& adresse, const std::string& telephone, const std::string& email);
-                 
+
         ~Patient();
-        
+
         // Acesseurs
         int getIdPatient() const;
         std::string getNomPatient() const;
@@ -26,7 +26,7 @@ class Patient
         std::string getAdresse() const;
         std::string getTelephone() const;
         std::string getEmail() const;
-        
+
         // Mutateurs
         void setNomPatient(const std::string& nom);
         void setPrenomPatient(const std::string& prenom);
@@ -35,10 +35,10 @@ class Patient
         void setAdresse(const std::string& adresse);
         void setTelephone(const std::string& telephone);
         void setEmail(const std::string& email);
-        
+
         std::string toCSV() const;
         static Patient fromCSV(const std::string& line);
-        
+
         void afficherInfos() const;
 
     protected:
@@ -48,6 +48,7 @@ class Patient
         std::string m_nomPatient;
         std::string m_prenomPatient;
         std::string m_dateDeNaissance; // Format JJ/MM/AAAA
+        int  m_numAssurance;
         std::string m_genre;
         std::string m_adresse;
         std::string m_telephone;

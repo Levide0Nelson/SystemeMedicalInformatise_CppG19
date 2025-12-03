@@ -120,8 +120,14 @@ void afficherMenuAuthentification()
          while (!user && essais < NB_TENTATIVES_CONNEXION)
          {
              std::cout << "\n\t==== Authentification ====\n";
-            std::cout << "Login : ";
+             std::cout << "Pour quitter entrez 0\n";
+             std::cout << "Login : ";
             std::getline(std::cin, login);
+
+            if (login == "0")
+            {
+                return nullptr;
+            }
 
             user = systeme.authentifierPremiereConnexion(login);
             if (!user)
@@ -173,6 +179,8 @@ void afficherMenuAuthentification()
 
          std::cout << "Mot de passe : ";
          std::getline(std::cin , password);
+         if (password == "0")
+            return nullptr;
 
          userConnecte = systeme.authentifier(login, password);
 

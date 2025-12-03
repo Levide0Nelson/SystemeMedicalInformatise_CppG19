@@ -3,6 +3,8 @@
 #include <string>
 #include <stdlib.h>
 #include <functional> // Pour le hachage des mots de passe qui est plus sécurisé
+#include <cctype>    // Pour la verification entiere
+#include <vector>
 
 void pauseConsole()
 {
@@ -30,3 +32,21 @@ std::string hashMotDePasse(const std::string& motDePasse)
     auto h = hasher(motDePasse);
     return std::to_string(h);
 }
+
+
+bool numAssuranceEstValide(const std::string& numAssurance)
+{
+    for (char c : numAssurance)
+    {
+        if (!std::isdigit(c))
+        {
+            return false;
+        }
+    }
+    if (numAssurance.length() < 8)
+    {
+        return false;
+    }
+    return true;
+}
+

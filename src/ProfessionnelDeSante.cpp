@@ -6,6 +6,7 @@
 #include "UtilConsole.h"
 
 
+
 ProfessionnelDeSante::ProfessionnelDeSante(int idPro, const std::string& nomPro, const std::string& prenomPro,const std::string& loginPro,
                              const std::string& mdpPro, const std::string& role, const std::string& specialite, const std::string& grade, bool premiereConnexion) :
                                  Utilisateur(idPro,nomPro,prenomPro,loginPro,mdpPro, role, premiereConnexion), m_specialite(specialite), m_grade(grade)
@@ -70,4 +71,3 @@ void ProfessionnelDeSante::afficherMenu() const
     std::cout << "11. Mon agenda (consultations a venir)\n";
     std::cout << "0. Deconnexion\n";
 }
-

@@ -7,6 +7,7 @@
 #include "UtilConsole.h"
 #include <thread>
 #include <chrono>
+#include "../Enumerations.h"
 
 
 
@@ -551,7 +552,7 @@ void Systeme::sauvegarderPatients() const
 {
     std::ofstream fichier(FICHIER_PATIENTS);
 
-    fichier << "N°;Nom;Prenom;DateDeNaissance;Genre;Adresse;Telephone;Email" << "\n";
+    fichier << "N°;Nom;Prenom;DateDeNaissance;NumAssurance;Genre;Adresse;Telephone;Email" << "\n";
     if (!m_patients.empty())
     {
         for (const auto& patient : m_patients)
@@ -813,11 +814,24 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
 {
     int idPatient;
     std::string date, heure, motif;
-
+    std::cout << "\tPour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "ID du patient a programmer : ";
     std::cin >> idPatient;
-    std::cin.ignore();
+    if (std::cin.fail())
+    {
+        std::cin.clear();
 
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+    }
+    std::cin.ignore();
+    if (idPatient == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     Patient* patient = rechercherPatient(idPatient);
 
     if (!patient)
@@ -832,6 +846,12 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
         {
             std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
             std::getline(std::cin, date);
+            if (date == "0")
+            {
+                std::cout << "\nQuitter...\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                return;
+            }
             Date::validerFormat(date);
             dateValide = true;
         }
@@ -847,6 +867,12 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
         {
             std::cout << "Heure (HH:MM) : ";
             std::getline(std::cin, heure);
+            if (heure == "0")
+            {
+                std::cout << "\nQuitter...\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                return;
+            }
             Date::validerHeure(heure);
             heureValide = true;
         }
@@ -858,6 +884,12 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
 
     std::cout << "Motif : ";
     std::getline(std::cin, motif);
+    if (motif == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     // Verification de la disponibilite ou non des creneaux
 
@@ -883,9 +915,17 @@ void Systeme::ajouterRdvProfessionnel(int idPro)
 void Systeme::supprimerRdvProfessionnel(int idPro)
 {
     int idRDV;
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "ID du rendez-vous a supprimer : ";
     std::cin >> idRDV;
     std::cin.ignore();
+    if (idRDV == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     for (auto it = m_rendezVous.begin(); it != m_rendezVous.end(); ++it)
     {
@@ -988,14 +1028,40 @@ void Systeme::menuGestionUtilisateurs()
                 nettoyerEcran();
                 std::cout << "\t\tCREATION D'UN COMPTE ADMINISTRATEUR\n" << std::endl;
                 std::string nom, prenom, login, password;
+                std::cout << "\t Pour quitter entrez 0\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 std::cout << "Nom du nouvel Administrateur : ";
                 std::getline(std::cin, nom);
+                if (nom == "0")
+                {
+                    std::cout << "\nQuitter...\n";
+                    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                    break;
+                }
                 std::cout << "Prenom du nouvel Administatrateur : ";
                 std::getline(std::cin, prenom);
+                if (prenom == "0")
+                {
+                    std::cout << "\nQuitter...\n";
+                    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                    break;
+                }
                 std::cout << "Username/Login : ";
                 std::getline(std::cin, login);
+                if (login == "0")
+                {
+                    std::cout << "\nQuitter...\n";
+                    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                    break;
+                }
                 std::cout << "Password par defaut (ce champ peut etre vide) : ";
                 std::getline(std::cin, password);
+                if (password == "0")
+                {
+                    std::cout << "\nQuitter...\n";
+                    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                    break;
+                }
 
                 Administrateur admin(genererIdPatient(), nom, prenom, login, password, false);
                 ajouterAdministrateur(admin);
@@ -1011,20 +1077,270 @@ void Systeme::menuGestionUtilisateurs()
                     nettoyerEcran();
                     std::cout << "\t\tCREATION D'UN COMPTE PROFESSIONNEL DE SANTE\n" << std::endl;
                     std::string nom, prenom, login, password, role, specialite, grade;
+                    std::cout << "\t Pour quitter entrez 0\n";
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
                     std::cout << "Nom : ";
                     std::getline(std::cin, nom);
+                    if (nom == "0")
+                    {
+                        std::cout << "\nQuitter...\n";
+                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                        break;
+                    }
                     std::cout << "Prenom : ";
                     std::getline(std::cin, prenom);
+                    if (prenom == "0")
+                    {
+                        std::cout << "\nQuitter...\n";
+                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                        break;
+                    }
                     std::cout << "Username : ";
                     std::getline(std::cin, login);
+                    if (login == "0")
+                    {
+                        std::cout << "\nQuitter...\n";
+                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                        break;
+                    }
                     std::cout << "Password par defaut (ce champ peut etre vide) : ";
                     std::getline(std::cin, password);
-                    std::cout << "Role (medecin/infirmier/pharmacien) : ";
-                    std::getline(std::cin, role);
-                    std::cout << "Specialite : ";
-                    std::getline(std::cin, specialite);
+                    if (password == "0")
+                    {
+                        std::cout << "Quitter...\n";
+                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                        break;
+                    }
+
+                    afficherRoles();
+                    bool continuer = true;
+                    while (continuer)
+                    {
+                        int choice;
+                        std::cout << "Entrer le numero du role (entre 1 et 8) : ";
+                        std::cin >> choice;
+                        if (std::cin.fail())
+                        {
+                            std::cin.clear();
+
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+                            continue;
+                        }
+                        std::cin.ignore();
+                        if (choice == 0)
+                        {
+                            std::cout << "\nQuitter...\n";
+                            continuer = false;
+                            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                            break;
+                        }
+                        switch (choice)
+                        {
+                            case static_cast<int>(RolePro::MEDECIN_GENERALE) +1 :
+                            {
+                                role = "Medecin generale";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::MEDECIN_SPECIALISTE)+ 1 :
+                            {
+                                role = "Medecin Specialiste";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::INFIRMIER) + 1 :
+                            {
+                                role = "Infirmier(e)";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::PHARMACIEN) + 1 :
+                            {
+                                role = "Pharmacien";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::SAGE_FEMME) + 1 :
+                            {
+                                role = "Sage Femme";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::DENTISTE) + 1 :
+                            {
+                                role = "Dentiste";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::TECHNICIEN_LABORATOIRE)+1 :
+                            {
+                                role = "Technicien Laboratoire";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(RolePro::RADIOLOGUE) + 1 :
+                            {
+                                role = "Radiologue";
+                                continuer = false;
+                                break;
+                            }
+                            default :
+                                {
+                                    std::cout << "Entree invalide.\n";
+                                    break;
+                                }
+                        }
+                    }
+                    afficherSpecialites();
+                    continuer = true;
+                    while (continuer)
+                    {
+                        int choice;
+                        std::cout << "Entrer le numero de la specialite (entre 1 et 18) : ";
+                        std::cin >> choice;
+                        if (std::cin.fail())
+                        {
+                            std::cin.clear();
+
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+                            continue;
+                        }
+                        std::cin.ignore();
+                        if (choice == 0)
+                        {
+                            std::cout << "\nQuitter\n";
+                            continuer = false;
+                            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                            break;
+                        }
+                        switch (choice)
+                        {
+                            case static_cast<int>(Specialite::MEDECINE_GENERALE) + 1 :
+                            {
+                                specialite = "MEDECINE GENERALE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::PEDIATRIE) +1  :
+                            {
+                                specialite = "PEDIATRIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::ORL) +1  :
+                            {
+                                specialite = "ORL";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::OPHTALMOLOGIE)+1 :
+                            {
+                                specialite = "OPHTAMOLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::CARDIOLOGIE) + 1 :
+                            {
+                                specialite = "CARDIOLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::GYNECOLOGIE) +1 :
+                            {
+                                specialite = "GYNECOLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::NEUROLOGIE )+1 :
+                            {
+                                specialite = "NEUROLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::CHIRURGIE)+1 :
+                            {
+                                specialite = "CHIRURGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::PSYCHIATRIE)+1:
+                            {
+                                specialite = "PSYCHIATRIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::DENTISTE)+1 :
+                            {
+                                specialite = "DENTISTE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::ANESTHESIE)+1 :
+                            {
+                                specialite = "ANESTHESISTE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::PHARMACIE) +1 :
+                            {
+                                specialite = "PHARMACIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::ACCOUCHEMENT) +1  :
+                            {
+                                specialite = "ACCOUCHEMENT";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::DERMATOLOGIE) +1  :
+                            {
+                                specialite = "DERMATOLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::PNEUMOLOGIE) +1 :
+                            {
+                                specialite = "PNEUMOLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::ORTHOPEDIE) +1 :
+                            {
+                                specialite = "ORTHOPEDIE";
+                                continuer =false;
+                                break;
+                            }
+                            case (static_cast<int>(Specialite::RADIOLOGIE)+1):
+                            {
+                                specialite = "RADIOLOGIE";
+                                continuer = false;
+                                break;
+                            }
+                            case static_cast<int>(Specialite::ANALYSE_BIO_MEDICALE) + 1 :
+                            {
+                                specialite = "ANALYSE BIO-MEICALE";
+                                continuer = false;
+                                break;
+                            }
+                            default :
+                            {
+                                std::cout << "Choix invalide. Choisissez entre " << static_cast<int>(Specialite::MEDECINE_GENERALE) + 1 << " et " << static_cast<int>(Specialite::ANALYSE_BIO_MEDICALE)+1 << "\n";
+                                break;
+                            }
+
+                        }
+                    }
                     std::cout << "Grade : ";
                     std::getline(std::cin, grade);
+                    if (grade == "0")
+                    {
+                        std::cout << "\nQuitter...\n";
+                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                        break;
+                    }
 
                     ProfessionnelDeSante pro(genererIdPatient(), nom, prenom, login, password, role, specialite, grade);
                     ajouterProfessionnel(pro);
@@ -1065,10 +1381,10 @@ void Systeme::menuGestionUtilisateurs()
                                  << std::setw(5) << "ID"
                                  << std::setw(15) << "Nom"
                                  << std::setw(20) << "Prenom(s)"
-                                 << std::setw(15) << "Role"
-                                 << std::setw(20) << "Specialite"
+                                 << std::setw(20) << "Role"
+                                 << std::setw(30) << "Specialite"
                                  << "\n";
-                        std::cout << std::string(80, '-') << "\n";
+                        std::cout << std::string(100, '-') << "\n";
 
                     for (const auto& pro : m_professionnels)
                     {
@@ -1076,10 +1392,10 @@ void Systeme::menuGestionUtilisateurs()
                                   << std::setw(5)  << pro.getIdUser()
                                   << std::setw(15) << pro.getNom()
                                   << std::setw(20) << pro.getPrenom()
-                                  << std::setw(15) << pro.getRole()
-                                  << std::setw(20) << pro.getSpecialite()
+                                  << std::setw(20) << pro.getRole()
+                                  << std::setw(30) << pro.getSpecialite()
                                   << "\n";
-                        std::cout << std::string(80, '-') << "\n";
+                        std::cout << std::string(100, '-') << "\n";
                     }
                     std::cout << " " << std::endl;
                     pauseConsole();
@@ -1107,31 +1423,99 @@ void Systeme::menuInscriptionPatient()
 {
     nettoyerEcran();
     std::string nom, prenom, dateNaissance, genre, adresse, telephone, email;
+    int numAssurance;
     std::cout << "\n===== INSCRIPTION D'UN PATIENT =====\n\n";
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "Nom : ";
     std::getline(std::cin, nom);
+    if (nom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Prenom : ";
     std::getline(std::cin, prenom);
+    if(prenom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     bool dateValide = false;
     while (!dateValide)
     {
         std::cout << "Date de naissance (DD-MM-YYYY ou DD/MM/YYYY) : ";
         std::getline(std::cin, dateNaissance);
+        if (dateNaissance == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+            return;
+        }
         Date::validerFormat(dateNaissance);
         dateValide = true;
     }
+    bool numValide = false;
+    while(!numValide)
+    {
+        std::cout << "Nunero d'assurance du patient (au moins 8 chiffres, sans letrre) : ";
+        std::cin >> numAssurance;
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+            continue;
+        }
+        std::cin.ignore();
+        if (numAssurance == 0)
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+            return;
+        }
+        numValide = numAssuranceEstValide(std::to_string(numAssurance));
+    }
+
     std::cout << "Genre (M/F) : ";
     std::getline(std::cin, genre);
+    if (genre == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Adresse : ";
     std::getline(std::cin, adresse);
+    if (adresse == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Telephone : ";
     std::getline(std::cin, telephone);
+    if (telephone == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Email : ";
     std::getline(std::cin, email);
+    if (email == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     int idPatient = m_nextIdPatient++;
 
-    Patient patient(idPatient, nom, prenom, dateNaissance, genre, adresse, telephone, email);
+    Patient patient(idPatient, nom, prenom, dateNaissance,numAssurance, genre, adresse, telephone, email);
     creerPatient(patient);
     std::cout << "[SUCCES] Patient inscrit.\n ID du nouveau patient: " << idPatient << "\n";
 }
@@ -1155,9 +1539,24 @@ void Systeme::menuConsultationDossier(Utilisateur* userConnecte)
 
         int idPatient;
         std::cout << "\n===== CONSULTATION D'UN DOSSIER PATIENT =====\n";
+        std::cout << "\t Pour quitter entrez 0\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
         std::cout << "ID du patient : ";
         std::cin >> idPatient;
-        std::cin.ignore();
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+    }
+    std::cin.ignore();
+        if (idPatient == 0)
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+            return;
+        }
 
         Patient* patient = rechercherPatient(idPatient);
         if (!patient)
@@ -1190,10 +1589,24 @@ void Systeme::menuRechercherPatient()
     nettoyerEcran();
     std::string nom, prenom;
     std::cout << "\n===== RECHERCHE D'UN PATIENT =====\n\n";
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "Nom du patient a rechercher : ";
     std::getline(std::cin, nom);
+    if (nom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Prenom du patient a rechercher : ";
     std::getline(std::cin, prenom);
+    if (prenom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     std::cout << "\n" + std::string(10, '-') + " Resultats " + std::string(10, '-') + "\n";
     bool trouve = false;
@@ -1223,9 +1636,25 @@ void Systeme::menuCreerConsultation()
     std::string date, motif, observations;
 
     std::cout << "\n===== CREATION D'UNE CONSULTATION =====\n\n";
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "ID du patient : ";
     std::cin >> idPatient;
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+        continue;
+    }
     std::cin.ignore();
+    if (idPatient == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     Patient* patient = rechercherPatient(idPatient);
 
     if (!patient)
@@ -1241,6 +1670,12 @@ void Systeme::menuCreerConsultation()
         {
             std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
             std::getline(std::cin, date);
+            if (date == "0")
+            {
+                std::cout << "\nQuitter...\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                return;
+            }
             Date::validerFormat(date);
             dateValide = true;
         }
@@ -1251,8 +1686,20 @@ void Systeme::menuCreerConsultation()
     }
     std::cout << "Motif : ";
     std::getline(std::cin, motif);
+    if (motif == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Observations : ";
     std::getline(std::cin, observations);
+    if (observations == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     int idConsult = creerConsultation(idPatient, m_utilisateurConnecte -> getNomComplet(), date, motif, observations);
     std::cout << "[SUCCES] Consultation creee. ID consultation : " << idConsult << "\n";
@@ -1269,9 +1716,25 @@ void Systeme::menuAjouterAntecedent()
     std::string type, description, date;
 
     std::cout << "\n===== AJOUT D'ANTECEDENTS A UN DOSSIER PATIENT =====\n\n";
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "ID du patient : ";
     std::cin >> idPatient;
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+        continue;
+    }
     std::cin.ignore();
+    if (idPatient == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     Patient* patient = rechercherPatient(idPatient);
 
@@ -1283,10 +1746,35 @@ void Systeme::menuAjouterAntecedent()
 
     std::cout << "Type (Allergie/Chirurgie/Pathologie/Autre) : ";
     std::getline(std::cin, type);
+    if (type == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Description : ";
     std::getline(std::cin, description);
-    std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
-    std::getline(std::cin, date);
+    if (description == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
+    bool dateValide = false;
+    while (!dateValide)
+    {
+        std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
+        std::getline(std::cin, date);
+        if (date == "0")
+        {
+            std::cout << "\nQuitter...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+            return;
+        }
+        Date::validerFormat(date);
+        dateValide = true;
+    }
+
 
     int idAnt = ajouterAntecedent(idPatient, type, description, date);
     std::cout << "[SUCCES] Antecedent ajoute  avec l'ID : " << idAnt << "\n";
@@ -1300,10 +1788,26 @@ void Systeme::menuArchivageDossiers()
 {
     nettoyerEcran();
     std::cout << "\n===== ARCHIVAGE D'UN DOSSIER PATIENT =====\n\n";
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     int idPatient;
     std::cout << "Entrer l'ID du patient a archiver : ";
-    std::cin >> idPatient;
-    std::cin.ignore();
+        std::cin >> idPatient;
+        if (std::cin.fail())
+        {
+             std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+            continue;
+        }
+        std::cin.ignore();
+    if (idPatient == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     DossierMedical* dossier = rechercherDossier(idPatient);
 
     if (!dossier)
@@ -1329,9 +1833,25 @@ void Systeme::menuAjouterPrescriptions()
     int idPatient, idConsult;
     std::string contenu, remarque, date;
     std::cout << "\n===== AJOUT DE PRESCRIPTIONS A UN DOSSIER PATIENT =====\n";
+    std::cout << "\t Pour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "ID du patient : ";
     std::cin >> idPatient;
-    std::cin.ignore();
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+        continue;
+    }
+        std::cin.ignore();
+    if (idPatient == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     Patient* patient = rechercherPatient(idPatient);
 
     if (!patient)
@@ -1341,12 +1861,38 @@ void Systeme::menuAjouterPrescriptions()
     }
 
     std::cout << "ID de la consultation associee : ";
-    std::cin >> idConsult;
-    std::cin.ignore();
+        std::cin >> idConsult;
+        if (std::cin.fail())
+        {
+             std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+            continue;
+        }
+        std::cin.ignore();
+    if (idConsult == 0)
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Contenu (medicament/examen/dose) : ";
     std::getline(std::cin, contenu);
+    if (contenu == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Remarques (facultatif) : ";
     std::getline(std::cin, remarque);
+    if (remarque == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     bool dateValide = false;
     while (!dateValide)
     {
@@ -1354,6 +1900,12 @@ void Systeme::menuAjouterPrescriptions()
         {
             std::cout << "Date (DD-MM-YYYY ou DD/MM/YYYY) : ";
             std::getline(std::cin, date);
+            if (date == "0")
+            {
+                std::cout << "\nQuitter...\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                return;
+            }
             Date::validerFormat(date);
             dateValide = true;
         }
@@ -1402,6 +1954,14 @@ void Systeme::menuAgendaProfessionnel()
         std::cout << "Votre choix : ";
         int choix;
         std::cin >> choix;
+        if (std::cin.fail())
+        {
+             std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+            continue;
+        }
         std::cin.ignore();
 
         switch (choix)
@@ -1453,6 +2013,14 @@ void Systeme::menuImportExport()
         std::cout << "5. Retour\n";
         std::cout << "Votre choix : ";
         std::cin >> choix;
+        if (std::cin.fail())
+        {
+             std::cin.clear();
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "[ERREUR] Entree invalide, veuillez entrer un chiffre." << std::endl;
+            continue;
+        }
         std::cin.ignore();
 
         switch(choix)
@@ -1474,8 +2042,20 @@ void Systeme::menuImportExport()
                                     std::cout << "ID du patient : ";
                                     std::cin >> idPatient;
                                     std::cin.ignore();
+                                    if (idPatient == 0)
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     std::cout << "Chemin d'expotation : ";
                                     std::getline(std::cin, chemin);
+                                    if (chemin == "0")
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     ImportExport::exporterDossierPatientEnTxt(idPatient, *this, chemin);
                                     pauseConsole();
                                     break;
@@ -1487,8 +2067,20 @@ void Systeme::menuImportExport()
                                     std::cout << "ID du patient : ";
                                     std::cin >> idPatient;
                                     std::cin.ignore();
+                                    if (idPatient == 0)
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     std::cout << "Chemin d'expotation : ";
                                     std::getline(std::cin, chemin);
+                                    if (chemin == "0")
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     ImportExport::exporterDossierPatientEnCsv(idPatient, *this, chemin);
                                     pauseConsole();
                                     break;
@@ -1524,6 +2116,12 @@ void Systeme::menuImportExport()
                                     std::string chemin;
                                     std::cout << "Chemin d'expotation : ";
                                     std::getline(std::cin, chemin);
+                                    if (chemin == "0")
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     ImportExport::exporterStatistiquesEnTxt(*this,chemin);
                                     pauseConsole();
                                     break;
@@ -1533,6 +2131,12 @@ void Systeme::menuImportExport()
                                     std::string chemin;
                                     std::cout << "Chemin d'expotation : ";
                                     std::getline(std::cin, chemin);
+                                    if (chemin == "0")
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     ImportExport::exporterStatistiquesEnCsv(*this, chemin);
                                     pauseConsole();
                                     break;
@@ -1566,6 +2170,12 @@ void Systeme::menuImportExport()
                                     std::string chemin;
                                     std::cout << "Chemin d'expotation : ";
                                     std::getline(std::cin, chemin);
+                                    if (chemin == "0")
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     ImportExport::exporterTousLesPatientsEnTxt(*this, chemin);
                                     pauseConsole();
                                     break;
@@ -1575,6 +2185,12 @@ void Systeme::menuImportExport()
                                     std::string chemin;
                                     std::cout << "Chemin d'expotation : ";
                                     std::getline(std::cin, chemin);
+                                    if (chemin == "0")
+                                    {
+                                        std::cout << "\nQuitter...\n";
+                                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                                        break;
+                                    }
                                     ImportExport::exporterTousLesPatientsEnCsv(*this, chemin);
                                     pauseConsole();
                                     break;
@@ -1595,9 +2211,18 @@ void Systeme::menuImportExport()
                 }
             case 4 :
                 {
+                    nettoyerEcran();
+                    std::cout << "\t Pour quitter entrez 0\n";
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
                     std::string chemin;
                     std::cout << "Chemin du fichier CSV : ";
                     std::getline(std::cin, chemin);
+                    if (chemin == "0")
+                    {
+                        std::cout << "\nQuitter...\n";
+                        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+                        break;
+                    }
                     ImportExport::importerPatients(chemin, *this);
                     pauseConsole();
                     break;
@@ -1619,6 +2244,8 @@ void Systeme::menuImportExport()
 void Systeme::afficherMenuExport()
 {
     nettoyerEcran();
+    std::cout << "\tPour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "1. Exporter au format .txt\n";
     std::cout << "2. Exporter au format .csv\n";
     std::cout << "3. Retour\n\n";
@@ -1744,12 +2371,26 @@ void Systeme::afficherDossiersArchives() const
 void Systeme::accorderHabilitation()
 {
     nettoyerEcran();
+    std::cout << "\tPour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::string nom, prenom;
     char choix;
     std::cout << "Entrez le nom de l'admin : ";
     std::getline(std::cin,nom);
+    if (nom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Entrez le prenom de l'admin : ";
     std::getline(std::cin, prenom);
+    if (prenom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     for (Administrateur& admin : m_admins)
     {
@@ -1792,12 +2433,26 @@ void Systeme::accorderHabilitation()
 void Systeme::retirerHabilitation()
 {
     nettoyerEcran();
+    std::cout << "\tPour quitter entrez 0\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::string nom, prenom;
     char choix;
     std::cout << "Entrez le nom de l'admin : ";
     std::getline(std::cin,nom);
+    if (nom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
     std::cout << "Entrez le prenom de l'admin : ";
     std::getline(std::cin, prenom);
+    if (prenom == "0")
+    {
+        std::cout << "\nQuitter...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        return;
+    }
 
     for (Administrateur& admin : m_admins)
     {
@@ -1860,6 +2515,46 @@ void Systeme::afficherAdministrateursHabilites() const
         std::cout << "\nAucun administrateur n'a une habilitation speciale\n";
     }
 }
+
+
+
+void Systeme::afficherRoles() const
+{
+    std::cout << "\n";
+    std::cout << "1. MEDECIN GENERALE\n";
+    std::cout << "2. MEDECIN SPECIALISTE\n";
+    std::cout << "3. INFIRMIER\n";
+    std::cout << "4. PHARMACIEN\n";
+    std::cout << "5. SAGE FEMME\n";
+    std::cout << "6. DENTISTE\n";
+    std::cout << "7. TECHNICIEN LABORATOIRE\n";
+    std::cout << "8. RADIOLOGUE\n\n";
+}
+
+
+void Systeme::afficherSpecialites() const
+{
+    std::cout << "\n";
+    std::cout << "1. MEDECINE GENERALE\n";
+    std::cout << "2. PEDIATRIE\n";
+    std::cout << "3. ORL\n";
+    std::cout << "4. OPHTALMOLOGIE\n";
+    std::cout << "5. CARDIOLOGIE\n";
+    std::cout << "6. GYNECOLOGIE\n";
+    std::cout << "7. NEUROLOGIE\n";
+    std::cout << "8. CHIRURGIE\n";
+    std::cout << "9. PSYCHIATRIE\n";
+    std::cout << "10. DENTISTION\n";
+    std::cout << "11. ANESTHESIE\n";
+    std::cout << "12. PRHARMACIE\n";
+    std::cout << "13. ACCOUCHEMENT\n";
+    std::cout << "14. DERMATOLOGIE";
+    std::cout << "15. PNEUMOLOGIE\n";
+    std::cout << "16. ORTHOPEDIE\n";
+    std::cout << "17. RADIOLOGIE\n";
+    std::cout << "18. ANALYSE BIO MEDICALE\n\n";
+}
+
 
 
 

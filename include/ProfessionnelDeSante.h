@@ -10,6 +10,7 @@
     Permissions dans le système : Peut consulteer et créer des consultations pour les patients
 */
 
+
 class ProfessionnelDeSante : public Utilisateur
 {
     public:

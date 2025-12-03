@@ -105,6 +105,9 @@ class Systeme
 
         void sauvegarderUtilisateursAdmins() const;
         void sauvegarderUtilisateursPro() const;
+        
+        void afficherRoles() const;
+        void afficherSpecialites() const;
 
     protected:
 
@@ -136,7 +139,7 @@ class Systeme
         void chargerDossiers();
         void chargerPrescriptions();
         void chargerRDV();
-        
+
 
         void sauvegarderAdmins() const;
         void sauvegarderProfessionnels() const;

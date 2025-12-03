@@ -32,6 +32,7 @@ class Administrateur : public Utilisateur
         std::string toCSV() const override;
         void afficherMenu() const override;
 
+
     protected:
 
     private:
